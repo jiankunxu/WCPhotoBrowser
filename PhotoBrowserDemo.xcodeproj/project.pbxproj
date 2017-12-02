@@ -7,15 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C6992140FE511CF5C6A96D4 /* libPods-PhotoBrowserDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE09AF5CCF5348EB0754C356 /* libPods-PhotoBrowserDemo.a */; };
+		7F0DF46A1FCD012F00A9C9C9 /* WCPhotoBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F0DF4691FCD012F00A9C9C9 /* WCPhotoBrowserView.m */; };
+		7F0DF46C1FCD0BF800A9C9C9 /* WCPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7F0DF46B1FCD0BF800A9C9C9 /* WCPhotoBrowser.bundle */; };
+		7F0DF46F1FCD0FC900A9C9C9 /* UIImage+bundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F0DF46E1FCD0FC900A9C9C9 /* UIImage+bundle.m */; };
+		7F0DF4721FCD36FB00A9C9C9 /* WCPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F0DF4711FCD36FB00A9C9C9 /* WCPhotoView.m */; };
+		7F0DF4741FCD376800A9C9C9 /* WCPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F0DF4731FCD376800A9C9C9 /* WCPhotoView.xib */; };
+		7F0DF4771FCE9BDB00A9C9C9 /* WCPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F0DF4761FCE9BDB00A9C9C9 /* WCPhotoModel.m */; };
 		7FA478811FCCF728009B638F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA478801FCCF728009B638F /* AppDelegate.m */; };
 		7FA478841FCCF728009B638F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA478831FCCF728009B638F /* ViewController.m */; };
 		7FA478871FCCF728009B638F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA478851FCCF728009B638F /* Main.storyboard */; };
 		7FA478891FCCF728009B638F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FA478881FCCF728009B638F /* Assets.xcassets */; };
 		7FA4788C1FCCF728009B638F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA4788A1FCCF728009B638F /* LaunchScreen.storyboard */; };
 		7FA4788F1FCCF728009B638F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA4788E1FCCF728009B638F /* main.m */; };
+		7FA4789D1FCCF879009B638F /* WCPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA4789B1FCCF879009B638F /* WCPhotoBrowserViewController.m */; };
+		7FA4789E1FCCF879009B638F /* WCPhotoBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FA4789C1FCCF879009B638F /* WCPhotoBrowserViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		317BA36D770DDAD44625BE48 /* Pods-PhotoBrowserDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowserDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoBrowserDemo/Pods-PhotoBrowserDemo.release.xcconfig"; sourceTree = "<group>"; };
+		7F0DF4681FCD012F00A9C9C9 /* WCPhotoBrowserView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCPhotoBrowserView.h; sourceTree = "<group>"; };
+		7F0DF4691FCD012F00A9C9C9 /* WCPhotoBrowserView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCPhotoBrowserView.m; sourceTree = "<group>"; };
+		7F0DF46B1FCD0BF800A9C9C9 /* WCPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WCPhotoBrowser.bundle; sourceTree = "<group>"; };
+		7F0DF46D1FCD0FC900A9C9C9 /* UIImage+bundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+bundle.h"; sourceTree = "<group>"; };
+		7F0DF46E1FCD0FC900A9C9C9 /* UIImage+bundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+bundle.m"; sourceTree = "<group>"; };
+		7F0DF4701FCD36FB00A9C9C9 /* WCPhotoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCPhotoView.h; sourceTree = "<group>"; };
+		7F0DF4711FCD36FB00A9C9C9 /* WCPhotoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCPhotoView.m; sourceTree = "<group>"; };
+		7F0DF4731FCD376800A9C9C9 /* WCPhotoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WCPhotoView.xib; sourceTree = "<group>"; };
+		7F0DF4751FCE9BDB00A9C9C9 /* WCPhotoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCPhotoModel.h; sourceTree = "<group>"; };
+		7F0DF4761FCE9BDB00A9C9C9 /* WCPhotoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCPhotoModel.m; sourceTree = "<group>"; };
 		7FA4787C1FCCF728009B638F /* PhotoBrowserDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoBrowserDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FA4787F1FCCF728009B638F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7FA478801FCCF728009B638F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -26,6 +46,12 @@
 		7FA4788B1FCCF728009B638F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7FA4788D1FCCF728009B638F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FA4788E1FCCF728009B638F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7FA478961FCCF79A009B638F /* WCPhotoBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCPhotoBrowser.h; sourceTree = "<group>"; };
+		7FA4789A1FCCF879009B638F /* WCPhotoBrowserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCPhotoBrowserViewController.h; sourceTree = "<group>"; };
+		7FA4789B1FCCF879009B638F /* WCPhotoBrowserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCPhotoBrowserViewController.m; sourceTree = "<group>"; };
+		7FA4789C1FCCF879009B638F /* WCPhotoBrowserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WCPhotoBrowserViewController.xib; sourceTree = "<group>"; };
+		AF45F79AF52226D86501C597 /* Pods-PhotoBrowserDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoBrowserDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoBrowserDemo/Pods-PhotoBrowserDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		FE09AF5CCF5348EB0754C356 /* libPods-PhotoBrowserDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PhotoBrowserDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +59,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C6992140FE511CF5C6A96D4 /* libPods-PhotoBrowserDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F0DF4671FCCFE7400A9C9C9 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7FA4788A1FCCF728009B638F /* LaunchScreen.storyboard */,
+				7FA4788E1FCCF728009B638F /* main.m */,
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
 		7FA478731FCCF728009B638F = {
 			isa = PBXGroup;
 			children = (
+				7FA478951FCCF77F009B638F /* WCPhotoBrowser */,
 				7FA4787E1FCCF728009B638F /* PhotoBrowserDemo */,
 				7FA4787D1FCCF728009B638F /* Products */,
+				FB131B63F23577B56ED94D5D /* Pods */,
+				F94294D801433C57E612547C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,11 +103,48 @@
 				7FA478831FCCF728009B638F /* ViewController.m */,
 				7FA478851FCCF728009B638F /* Main.storyboard */,
 				7FA478881FCCF728009B638F /* Assets.xcassets */,
-				7FA4788A1FCCF728009B638F /* LaunchScreen.storyboard */,
 				7FA4788D1FCCF728009B638F /* Info.plist */,
-				7FA4788E1FCCF728009B638F /* main.m */,
+				7F0DF4671FCCFE7400A9C9C9 /* Support Files */,
 			);
 			path = PhotoBrowserDemo;
+			sourceTree = "<group>";
+		};
+		7FA478951FCCF77F009B638F /* WCPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				7FA478961FCCF79A009B638F /* WCPhotoBrowser.h */,
+				7FA4789A1FCCF879009B638F /* WCPhotoBrowserViewController.h */,
+				7FA4789B1FCCF879009B638F /* WCPhotoBrowserViewController.m */,
+				7FA4789C1FCCF879009B638F /* WCPhotoBrowserViewController.xib */,
+				7F0DF4681FCD012F00A9C9C9 /* WCPhotoBrowserView.h */,
+				7F0DF4691FCD012F00A9C9C9 /* WCPhotoBrowserView.m */,
+				7F0DF4701FCD36FB00A9C9C9 /* WCPhotoView.h */,
+				7F0DF4711FCD36FB00A9C9C9 /* WCPhotoView.m */,
+				7F0DF4731FCD376800A9C9C9 /* WCPhotoView.xib */,
+				7F0DF4751FCE9BDB00A9C9C9 /* WCPhotoModel.h */,
+				7F0DF4761FCE9BDB00A9C9C9 /* WCPhotoModel.m */,
+				7F0DF46D1FCD0FC900A9C9C9 /* UIImage+bundle.h */,
+				7F0DF46E1FCD0FC900A9C9C9 /* UIImage+bundle.m */,
+				7F0DF46B1FCD0BF800A9C9C9 /* WCPhotoBrowser.bundle */,
+			);
+			path = WCPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		F94294D801433C57E612547C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE09AF5CCF5348EB0754C356 /* libPods-PhotoBrowserDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB131B63F23577B56ED94D5D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AF45F79AF52226D86501C597 /* Pods-PhotoBrowserDemo.debug.xcconfig */,
+				317BA36D770DDAD44625BE48 /* Pods-PhotoBrowserDemo.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,9 +154,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7FA478921FCCF728009B638F /* Build configuration list for PBXNativeTarget "PhotoBrowserDemo" */;
 			buildPhases = (
+				CF253465BCECB34CBEEFC868 /* [CP] Check Pods Manifest.lock */,
 				7FA478781FCCF728009B638F /* Sources */,
 				7FA478791FCCF728009B638F /* Frameworks */,
 				7FA4787A1FCCF728009B638F /* Resources */,
+				EF34DA6426E91BFB36CEA195 /* [CP] Embed Pods Frameworks */,
+				B5D2151611483419FD303384 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,6 +208,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F0DF46C1FCD0BF800A9C9C9 /* WCPhotoBrowser.bundle in Resources */,
+				7F0DF4741FCD376800A9C9C9 /* WCPhotoView.xib in Resources */,
+				7FA4789E1FCCF879009B638F /* WCPhotoBrowserViewController.xib in Resources */,
 				7FA4788C1FCCF728009B638F /* LaunchScreen.storyboard in Resources */,
 				7FA478891FCCF728009B638F /* Assets.xcassets in Resources */,
 				7FA478871FCCF728009B638F /* Main.storyboard in Resources */,
@@ -137,13 +219,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B5D2151611483419FD303384 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoBrowserDemo/Pods-PhotoBrowserDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF253465BCECB34CBEEFC868 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PhotoBrowserDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF34DA6426E91BFB36CEA195 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoBrowserDemo/Pods-PhotoBrowserDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7FA478781FCCF728009B638F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F0DF46A1FCD012F00A9C9C9 /* WCPhotoBrowserView.m in Sources */,
+				7F0DF46F1FCD0FC900A9C9C9 /* UIImage+bundle.m in Sources */,
+				7FA4789D1FCCF879009B638F /* WCPhotoBrowserViewController.m in Sources */,
 				7FA478841FCCF728009B638F /* ViewController.m in Sources */,
+				7F0DF4721FCD36FB00A9C9C9 /* WCPhotoView.m in Sources */,
 				7FA4788F1FCCF728009B638F /* main.m in Sources */,
+				7F0DF4771FCE9BDB00A9C9C9 /* WCPhotoModel.m in Sources */,
 				7FA478811FCCF728009B638F /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,12 +414,21 @@
 		};
 		7FA478931FCCF728009B638F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF45F79AF52226D86501C597 /* Pods-PhotoBrowserDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 96PFYKQ596;
 				INFOPLIST_FILE = PhotoBrowserDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"ImageIO\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = WangChao.PhotoBrowserDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -290,12 +437,21 @@
 		};
 		7FA478941FCCF728009B638F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 317BA36D770DDAD44625BE48 /* Pods-PhotoBrowserDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 96PFYKQ596;
 				INFOPLIST_FILE = PhotoBrowserDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					"\"ImageIO\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = WangChao.PhotoBrowserDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
