@@ -48,7 +48,8 @@
 //    vc.modalPresentationStyle = UIModalPresentationCustom;
 //    self.maskTransitionDelegate = [[WCMaskTransitionDelegate alloc] init];
 //    vc.transitioningDelegate = self.maskTransitionDelegate;
-    [self presentViewController:vc animated:YES completion:nil];
+//    [self presentViewController:vc animated:YES completion:nil];
+    [vc show];
 }
 
 @end

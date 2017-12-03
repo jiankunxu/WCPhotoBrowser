@@ -85,4 +85,9 @@
  */
 - (instancetype)initWithLocalImages:(NSArray<UIImage *> *)localImages;
 
+/**
+ 展示图片浏览器
+ */
+- (void)show;
+
 @end

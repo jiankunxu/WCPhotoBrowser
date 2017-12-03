@@ -7,10 +7,11 @@
 //
 
 #import "WCPhotoBrowserViewController.h"
-#import "WCPhotoModel.h"
 #import "WCPhotoBrowserView.h"
+#import "WCPhotoModel.h"
+#import "UIImage+Bundle.h"
+#import "UIViewController+TopViewController.h"
 #import "WCTransition/WCMaskTransitionDelegate.h"
-#import "UIImage+bundle.h"
 
 @interface WCPhotoBrowserViewController () <WCPhotoBrowserDelegate> {
     WCMaskTransitionDelegate *_maskTransitionDelegate;
@@ -35,7 +36,7 @@
 
 - (instancetype)initWithImages:(NSArray<WCPhotoModel *> *)images {
     if (self = [super init]) {
-        _images = images;
+        self.images = images;
         [self commonInit];
     }
     return self;
@@ -43,7 +44,7 @@
 
 - (instancetype)initWithNetworkImages:(NSArray *)networkImages {
     if (self = [super init]) {
-        _networkImages = networkImages;
+        self.networkImages = networkImages;
         [self commonInit];
     }
     return self;
@@ -51,7 +52,7 @@
 
 - (instancetype)initWithLocalImages:(NSArray<UIImage *> *)localImages {
     if (self = [super init]) {
-        _localImages = localImages;
+        self.localImages = localImages;
         [self commonInit];
     }
     return self;
@@ -60,9 +61,6 @@
 - (void)commonInit {
     _displayPhotoOrderInfo = NO;
     _displayPageControl = NO;
-    self.modalPresentationStyle = UIModalPresentationCustom;
-    _maskTransitionDelegate = [[WCMaskTransitionDelegate alloc] init];
-    self.transitioningDelegate = _maskTransitionDelegate;
 }
 
 - (void)viewDidLoad {
@@ -78,6 +76,21 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return self.showStatusBar;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
+- (void)show {
+    self.modalPresentationStyle = UIModalPresentationCustom;
+    _maskTransitionDelegate = [[WCMaskTransitionDelegate alloc] init];
+    self.transitioningDelegate = _maskTransitionDelegate;
+    [[UIViewController topViewController] presentViewController:self animated:YES completion:nil];
 }
 
 - (void)setupNavigationBar {
@@ -108,14 +121,6 @@
     }
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return self.showStatusBar;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
 #pragma mark PhotoBrowser Delegate
 
 - (NSInteger)numberOfPhotosInPhotoBrowser:(WCPhotoBrowserView *)photoBrowser {
@@ -136,12 +141,6 @@
 }
 
 - (NSInteger)firstDisplayPhotoIndexInPhotoBrowser:(WCPhotoBrowserView *)photoBrowser {
-    if (self.firstDisplayPhotoIndex < 0) {
-        self.firstDisplayPhotoIndex = 0;
-    }
-    if (self.firstDisplayPhotoIndex >= self.images.count) {
-        self.firstDisplayPhotoIndex = self.images.count - 1;
-    }
     return self.firstDisplayPhotoIndex;
 }
 

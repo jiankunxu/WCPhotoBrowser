@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImage (bundle)
+@interface UIImage (Bundle)
 
 + (UIImage *)wc_imageNamed:(NSString *)name bundleName:(NSString *)bundleName;
 
