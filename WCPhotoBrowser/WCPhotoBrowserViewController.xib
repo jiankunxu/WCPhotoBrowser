@@ -40,6 +40,22 @@
                         <constraint firstItem="UEU-Wf-qEP" firstAttribute="leading" secondItem="vGo-bN-loR" secondAttribute="leading" id="st9-iu-JsK"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AB8-YI-9T8" userLabel="Bottom View">
+                    <rect key="frame" x="0.0" y="630" width="375" height="37"/>
+                    <subviews>
+                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" defersCurrentPageDisplay="YES" numberOfPages="9" currentPage="5" translatesAutoresizingMaskIntoConstraints="NO" id="zAs-Oy-fHm">
+                            <rect key="frame" x="120" y="-0.5" width="135" height="37"/>
+                            <color key="pageIndicatorTintColor" red="0.90925633910000003" green="0.3385390043" blue="0.31378236409999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </pageControl>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="i5W-ql-tTK"/>
+                        <constraint firstItem="zAs-Oy-fHm" firstAttribute="centerX" secondItem="AB8-YI-9T8" secondAttribute="centerX" id="kJl-Pl-687"/>
+                        <constraint firstItem="zAs-Oy-fHm" firstAttribute="centerY" secondItem="AB8-YI-9T8" secondAttribute="centerY" id="yOS-eC-fR5"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inY-09-kzP" userLabel="Navigagtion Bar View">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
@@ -62,42 +78,26 @@
                     <color key="backgroundColor" red="1" green="0.70163584369999998" blue="0.087095782570000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="A8D-sj-wNb" firstAttribute="centerY" secondItem="ahv-bv-Nc6" secondAttribute="centerY" id="1wg-2h-YoO"/>
-                        <constraint firstItem="ahv-bv-Nc6" firstAttribute="leading" secondItem="inY-09-kzP" secondAttribute="leading" id="Dn2-Nr-l8z"/>
-                        <constraint firstAttribute="height" constant="64" id="Fzb-8N-RG3"/>
-                        <constraint firstAttribute="bottom" secondItem="ahv-bv-Nc6" secondAttribute="bottom" constant="14" id="GwJ-Vh-62a"/>
-                        <constraint firstItem="ahv-bv-Nc6" firstAttribute="top" secondItem="inY-09-kzP" secondAttribute="top" constant="20" id="ZtD-9r-PYT"/>
-                        <constraint firstItem="A8D-sj-wNb" firstAttribute="centerX" secondItem="inY-09-kzP" secondAttribute="centerX" id="pYF-KP-gPT"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AB8-YI-9T8" userLabel="Bottom View">
-                    <rect key="frame" x="0.0" y="630" width="375" height="37"/>
-                    <subviews>
-                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" defersCurrentPageDisplay="YES" numberOfPages="9" currentPage="5" translatesAutoresizingMaskIntoConstraints="NO" id="zAs-Oy-fHm">
-                            <rect key="frame" x="120" y="-0.5" width="135" height="37"/>
-                            <color key="pageIndicatorTintColor" red="0.90925633910000003" green="0.3385390043" blue="0.31378236409999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </pageControl>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="37" id="i5W-ql-tTK"/>
-                        <constraint firstItem="zAs-Oy-fHm" firstAttribute="centerX" secondItem="AB8-YI-9T8" secondAttribute="centerX" id="kJl-Pl-687"/>
-                        <constraint firstItem="zAs-Oy-fHm" firstAttribute="centerY" secondItem="AB8-YI-9T8" secondAttribute="centerY" id="yOS-eC-fR5"/>
+                        <constraint firstAttribute="height" constant="64" id="JVg-qQ-aM5"/>
+                        <constraint firstItem="ahv-bv-Nc6" firstAttribute="leading" secondItem="inY-09-kzP" secondAttribute="leading" id="Twl-oM-aa1"/>
+                        <constraint firstItem="A8D-sj-wNb" firstAttribute="centerX" secondItem="inY-09-kzP" secondAttribute="centerX" id="fWD-Ra-WPo"/>
+                        <constraint firstAttribute="bottom" secondItem="ahv-bv-Nc6" secondAttribute="bottom" constant="14" id="lTX-Pq-xdP"/>
+                        <constraint firstItem="ahv-bv-Nc6" firstAttribute="top" secondItem="inY-09-kzP" secondAttribute="top" constant="20" id="lqt-fm-obX"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="vGo-bN-loR" secondAttribute="trailing" id="1Uj-aJ-Vo3"/>
+                <constraint firstItem="inY-09-kzP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5IK-M3-ZEY"/>
                 <constraint firstItem="vGo-bN-loR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ios-Pg-oNv"/>
+                <constraint firstAttribute="trailing" secondItem="inY-09-kzP" secondAttribute="trailing" id="MOE-Pf-cwj"/>
                 <constraint firstAttribute="bottom" secondItem="vGo-bN-loR" secondAttribute="bottom" id="Ne5-KY-0th"/>
                 <constraint firstItem="vGo-bN-loR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="TLe-Wm-DEo"/>
                 <constraint firstItem="AB8-YI-9T8" firstAttribute="leading" secondItem="vGo-bN-loR" secondAttribute="leading" id="VFH-lu-lGk"/>
                 <constraint firstItem="vGo-bN-loR" firstAttribute="bottom" secondItem="AB8-YI-9T8" secondAttribute="bottom" id="aJP-dE-HMn"/>
-                <constraint firstItem="inY-09-kzP" firstAttribute="leading" secondItem="vGo-bN-loR" secondAttribute="leading" id="g4v-aw-INl"/>
-                <constraint firstItem="inY-09-kzP" firstAttribute="trailing" secondItem="vGo-bN-loR" secondAttribute="trailing" id="i8b-cJ-4N7"/>
+                <constraint firstItem="inY-09-kzP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gnc-PV-773"/>
                 <constraint firstItem="vGo-bN-loR" firstAttribute="trailing" secondItem="AB8-YI-9T8" secondAttribute="trailing" id="k9K-fU-j6t"/>
-                <constraint firstItem="inY-09-kzP" firstAttribute="top" secondItem="vGo-bN-loR" secondAttribute="top" id="ylo-0Z-Y88"/>
             </constraints>
             <point key="canvasLocation" x="79.5" y="53.5"/>
         </view>

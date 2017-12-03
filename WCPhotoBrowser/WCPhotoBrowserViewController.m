@@ -9,9 +9,12 @@
 #import "WCPhotoBrowserViewController.h"
 #import "WCPhotoModel.h"
 #import "WCPhotoBrowserView.h"
+#import "WCTransition/WCMaskTransitionDelegate.h"
 #import "UIImage+bundle.h"
 
-@interface WCPhotoBrowserViewController () <WCPhotoBrowserDelegate>
+@interface WCPhotoBrowserViewController () <WCPhotoBrowserDelegate> {
+    WCMaskTransitionDelegate *_maskTransitionDelegate;
+}
 
 @property (weak, nonatomic) IBOutlet WCPhotoBrowserView *photoBrowserView;
 @property (weak, nonatomic) IBOutlet UIView *navigationBarView;
@@ -57,6 +60,9 @@
 - (void)commonInit {
     _displayPhotoOrderInfo = NO;
     _displayPageControl = NO;
+    self.modalPresentationStyle = UIModalPresentationCustom;
+    _maskTransitionDelegate = [[WCMaskTransitionDelegate alloc] init];
+    self.transitioningDelegate = _maskTransitionDelegate;
 }
 
 - (void)viewDidLoad {
@@ -67,6 +73,11 @@
     [self setupPhotoOrderLabel];
     [self setupPhotoPageControl];
     self.photoBrowserView.delegate = self;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (void)setupNavigationBar {
@@ -95,11 +106,6 @@
     } else {
         self.photoPageControl.hidden = YES;
     }
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (BOOL)prefersStatusBarHidden {

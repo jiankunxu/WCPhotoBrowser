@@ -10,8 +10,8 @@
 #import "WCPhotoModel.h"
 #import "WCPhotoView.h"
 
-#define kWCScreentWidth [UIScreen mainScreen].bounds.size.width
-#define kWCScreentHeight [UIScreen mainScreen].bounds.size.height
+//#define kWCScreentWidth [UIScreen mainScreen].bounds.size.width
+//#define kWCScreentHeight [UIScreen mainScreen].bounds.size.height
 static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
 
 @interface WCPhotoBrowserView () <UIScrollViewDelegate>
@@ -31,14 +31,6 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
 @implementation WCPhotoBrowserView
 
 - (void)setupInterface {
-    [self addSubview:self.scrollView];
-    self.scrollViewWidth = kWCScreentWidth + [self photoSpacing];
-    self.scrollViewHeight = kWCScreentHeight;
-    CGRect frame = CGRectMake(0, 0, self.scrollViewWidth, self.scrollViewHeight);
-    self.scrollView.frame = frame;
-    self.scrollView.contentSize = CGSizeMake(self.scrollViewWidth*self.totalPhotos, self.scrollViewHeight);
-    [self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
     if ([_delegate respondsToSelector:@selector(placeholderImageForPhotoBrowser:)]) {
         UIImage *placeholderImage = [_delegate placeholderImageForPhotoBrowser:self];
         self.placeholderImage = placeholderImage;
@@ -47,10 +39,35 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
         NSInteger displayPhotoIndex = [_delegate firstDisplayPhotoIndexInPhotoBrowser:self];
         self.displayPhotoIndex = [self safeIndexForPhotoBrowserWithIndex:displayPhotoIndex];
     }
+    
+    [self addSubview:self.scrollView];
+    [self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     WCPhotoView *photoView = [self photoViewAtIndex:self.displayPhotoIndex];
-    if (photoView) {
-        [self.visiblePhotos addObject:photoView];
-        [self.scrollView scrollRectToVisible:photoView.frame animated:NO];
+    [self.visiblePhotos addObject:photoView];
+    [self redisplayPhotoBrowser];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self redisplayPhotoBrowser];
+}
+
+/**
+ 重新布局photoBrowser(例如：屏幕旋转等)
+ */
+- (void)redisplayPhotoBrowser {
+    self.scrollViewWidth = self.bounds.size.width + [self photoSpacing];
+    self.scrollViewHeight = self.bounds.size.height;
+    WCPhotoView *currentDisplayPhotoView = [self currentDisplayPhotoView];
+    CGRect frame = CGRectMake(0, 0, self.scrollViewWidth, self.scrollViewHeight);
+    self.scrollView.frame = frame;
+    self.scrollView.contentSize = CGSizeMake(self.scrollViewWidth*self.totalPhotos, self.scrollViewHeight);
+    for (UIView *subView in self.scrollView.subviews) {
+        WCPhotoView *photoView = (WCPhotoView *)subView;
+        photoView.frame = CGRectMake(self.scrollViewWidth*photoView.photoIndex, 0, self.scrollViewWidth, self.scrollViewHeight);
+    }
+    if (currentDisplayPhotoView) {
+        [self.scrollView scrollRectToVisible:currentDisplayPhotoView.frame animated:NO];
     }
 }
 
@@ -135,6 +152,19 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
     return photoView;
 }
 
+
+/**
+ 返回当前展示的photo
+ */
+- (WCPhotoView *)currentDisplayPhotoView {
+    WCPhotoView *currentDisplayPhotoView = nil;
+    for (WCPhotoView *photoView in self.visiblePhotos) {
+        if (photoView.photoIndex == self.displayPhotoIndex) {
+            currentDisplayPhotoView = photoView;
+        }
+    }
+    return currentDisplayPhotoView;
+}
 
 /**
  根据当前的index，返回一个安全的index值，防止下标越界之类的问题。

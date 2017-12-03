@@ -11,6 +11,8 @@
 
 @interface ViewController ()
 
+@property (nonatomic, strong) WCMaskTransitionDelegate *maskTransitionDelegate;
+
 @end
 
 @implementation ViewController
@@ -43,6 +45,9 @@
                         @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512032297305&di=0afdc563006d990bab463e33d4f21cc3&imgtype=0&src=http%3A%2F%2Fimg.ycwb.com%2Fnews%2Fattachement%2Fgif%2Fsite2%2F20160921%2F507b9d762551194c19be5f.gif"
                         ];
     vc.networkImages = images;
+//    vc.modalPresentationStyle = UIModalPresentationCustom;
+//    self.maskTransitionDelegate = [[WCMaskTransitionDelegate alloc] init];
+//    vc.transitioningDelegate = self.maskTransitionDelegate;
     [self presentViewController:vc animated:YES completion:nil];
 }
 

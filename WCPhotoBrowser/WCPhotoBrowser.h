@@ -11,5 +11,6 @@
 
 #import "WCPhotoModel.h"
 #import "WCPhotoBrowserViewController.h"
+#import "WCMaskTransitionDelegate.h"
 
 #endif /* WCPhotoBrowser_h */
