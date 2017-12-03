@@ -11,10 +11,10 @@
 #import "WCPhotoModel.h"
 #import "UIImage+Bundle.h"
 #import "UIViewController+TopViewController.h"
-#import "WCTransition/WCMaskTransitionDelegate.h"
+#import "WCMaskAnimatedTransition.h"
 
 @interface WCPhotoBrowserViewController () <WCPhotoBrowserDelegate> {
-    WCMaskTransitionDelegate *_maskTransitionDelegate;
+    WCMaskAnimatedTransition *_maskAnimatedTransition;
 }
 
 @property (weak, nonatomic) IBOutlet WCPhotoBrowserView *photoBrowserView;
@@ -88,8 +88,8 @@
 
 - (void)show {
     self.modalPresentationStyle = UIModalPresentationCustom;
-    _maskTransitionDelegate = [[WCMaskTransitionDelegate alloc] init];
-    self.transitioningDelegate = _maskTransitionDelegate;
+    _maskAnimatedTransition = [[WCMaskAnimatedTransition alloc] init];
+    self.transitioningDelegate = _maskAnimatedTransition;
     [[UIViewController topViewController] presentViewController:self animated:YES completion:nil];
 }
 

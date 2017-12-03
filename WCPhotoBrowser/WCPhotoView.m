@@ -78,15 +78,18 @@ static const CGFloat kDefaultZoomScaleForPhotoScrollView = 1.0;
 }
 
 - (void)doubleTapGesture:(UIGestureRecognizer *)gesture {
-    NSLog(@"%@", NSStringFromCGPoint([gesture locationInView:self.photoImageView]));
     if (self.currentZoomScale != kDefaultZoomScaleForPhotoScrollView) {
         [self.photoScrollView setZoomScale:kDefaultZoomScaleForPhotoScrollView animated:YES];
     } else {
-        [self.photoScrollView setZoomScale:kMaximumZoomScaleForPhotoScrollView animated:YES];
+        // 以触摸点为中心放大
+        CGPoint touchPoint = [gesture locationInView:self.photoImageView];
+        CGFloat width = self.photoImageView.bounds.size.width / kMaximumZoomScaleForPhotoScrollView;
+        CGFloat height = self.photoImageView.bounds.size.height / kMaximumZoomScaleForPhotoScrollView;
+        [self.photoScrollView zoomToRect:CGRectMake(touchPoint.x - width/2.0, touchPoint.y - height/2.0, width, height) animated:YES];
     }
 }
 
-#pragma mark ScrollView Delegagte
+#pragma mark - ScrollView Delegagte
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.photoImageView;

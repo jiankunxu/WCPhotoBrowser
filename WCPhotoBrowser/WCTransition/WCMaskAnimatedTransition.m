@@ -10,8 +10,16 @@
 
 @implementation WCMaskAnimatedTransition
 
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    return self;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    return self;
+}
+
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
-    return 0.25;
+    return 0.3;
 }
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {

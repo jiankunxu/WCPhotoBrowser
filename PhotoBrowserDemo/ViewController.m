@@ -11,8 +11,6 @@
 
 @interface ViewController ()
 
-@property (nonatomic, strong) WCMaskTransitionDelegate *maskTransitionDelegate;
-
 @end
 
 @implementation ViewController

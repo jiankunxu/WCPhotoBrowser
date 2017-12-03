@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface WCMaskAnimatedTransition : NSObject <UIViewControllerAnimatedTransitioning>
+@interface WCMaskAnimatedTransition : NSObject <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
 @end
