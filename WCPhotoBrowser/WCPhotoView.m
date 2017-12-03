@@ -27,7 +27,6 @@ static const CGFloat kDefaultZoomScaleForPhotoScrollView = 1.0;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-//    self.photoImageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.photoImageView = [[UIImageView alloc] init];
     self.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.photoImageView.userInteractionEnabled = YES;

@@ -87,9 +87,11 @@
 }
 
 - (void)show {
+    if (!self.transitioningDelegate) {
+        _maskAnimatedTransition = [[WCMaskAnimatedTransition alloc] init];
+        self.transitioningDelegate = _maskAnimatedTransition;
+    }
     self.modalPresentationStyle = UIModalPresentationCustom;
-    _maskAnimatedTransition = [[WCMaskAnimatedTransition alloc] init];
-    self.transitioningDelegate = _maskAnimatedTransition;
     [[UIViewController topViewController] presentViewController:self animated:YES completion:nil];
 }
 
