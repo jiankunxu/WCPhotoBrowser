@@ -22,13 +22,13 @@
 @property (nonatomic, strong) UIImage *localImage;
 
 /**
- 图片描述
+ 图片描述（暂时没有）
  */
-@property (nonatomic, copy) NSString *imageDescription;
+//@property (nonatomic, copy) NSString *imageDescription;
 
 - (instancetype)initWithImageURL:(NSString *)imageURL;
 - (instancetype)initWithLocalImage:(UIImage *)localImage;
-- (instancetype)initWithImageURL:(NSString *)imageURL imageDescription:(NSString *)imageDescription;
-- (instancetype)initWithLocalImage:(UIImage *)localImage imageDescription:(NSString *)imageDescription;
+//- (instancetype)initWithImageURL:(NSString *)imageURL imageDescription:(NSString *)imageDescription;
+//- (instancetype)initWithLocalImage:(UIImage *)localImage imageDescription:(NSString *)imageDescription;
 
 @end

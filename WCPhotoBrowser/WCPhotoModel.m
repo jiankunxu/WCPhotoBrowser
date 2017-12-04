@@ -24,20 +24,20 @@
     return self;
 }
 
-- (instancetype)initWithImageURL:(NSString *)imageURL imageDescription:(NSString *)imageDescription {
-    if (self = [super init]) {
-        self.imageURL = imageURL;
-        self.imageDescription = imageDescription;
-    }
-    return self;
-}
-
-- (instancetype)initWithLocalImage:(UIImage *)localImage imageDescription:(NSString *)imageDescription {
-    if (self = [super init]) {
-        self.localImage = localImage;
-        self.imageDescription = imageDescription;
-    }
-    return self;
-}
+//- (instancetype)initWithImageURL:(NSString *)imageURL imageDescription:(NSString *)imageDescription {
+//    if (self = [super init]) {
+//        self.imageURL = imageURL;
+//        self.imageDescription = imageDescription;
+//    }
+//    return self;
+//}
+//
+//- (instancetype)initWithLocalImage:(UIImage *)localImage imageDescription:(NSString *)imageDescription {
+//    if (self = [super init]) {
+//        self.localImage = localImage;
+//        self.imageDescription = imageDescription;
+//    }
+//    return self;
+//}
 
 @end

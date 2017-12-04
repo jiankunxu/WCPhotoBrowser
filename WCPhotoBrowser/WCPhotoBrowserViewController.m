@@ -73,13 +73,17 @@
     self.photoBrowserView.delegate = self;
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 - (BOOL)prefersStatusBarHidden {
-    return self.showStatusBar;
+    return !self.showStatusBar;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -91,7 +95,13 @@
         _maskAnimatedTransition = [[WCMaskAnimatedTransition alloc] init];
         self.transitioningDelegate = _maskAnimatedTransition;
     }
+    /**
+     In iOS7, there's actually a new property for UIViewController called modalPresentationCapturesStatusBarAppearance
+     When you present a view controller by calling the presentViewController:animated:completion: method, status bar appearance control is transferred from the presenting to the presented view controller only if the presented controller’s modalPresentationStyle value is UIModalPresentationFullScreen. By setting this property to YES, you specify the presented view controller controls status bar appearance, even though presented non–fullscreen.
+     网址链接:https://stackoverflow.com/questions/23615647/uiviewcontrollers-prefersstatusbarhidden-not-working
+     */
     self.modalPresentationStyle = UIModalPresentationCustom;
+    self.modalPresentationCapturesStatusBarAppearance = YES;
     [[UIViewController topViewController] presentViewController:self animated:YES completion:nil];
 }
 

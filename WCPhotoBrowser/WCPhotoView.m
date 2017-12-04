@@ -95,6 +95,7 @@ static const CGFloat kDefaultZoomScaleForPhotoScrollView = 1.0;
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    // 居中缩放
     CGFloat offsetX = MAX((scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5, 0.0);
     CGFloat offsetY = MAX((scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5, 0.0);
     self.photoImageView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX, scrollView.contentSize.height * 0.5 + offsetY);
