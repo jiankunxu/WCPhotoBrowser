@@ -18,6 +18,7 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImage *placeholderImage;
+@property (nonatomic, assign, getter=isResizingSubViews) BOOL resizingSubViews;
 
 @property (nonatomic, strong) NSMutableArray<WCPhotoView *> *visiblePhotos;
 @property (nonatomic, strong) NSMutableSet<WCPhotoView *> *reuseablePhotos;
@@ -49,7 +50,9 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    self.resizingSubViews = YES;
     [self redisplayPhotoBrowser];
+    self.resizingSubViews = NO;
 }
 
 /**
@@ -65,6 +68,7 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
     for (UIView *subView in self.scrollView.subviews) {
         WCPhotoView *photoView = (WCPhotoView *)subView;
         photoView.frame = CGRectMake(self.scrollViewWidth*photoView.photoIndex, 0, self.scrollViewWidth, self.scrollViewHeight);
+        [photoView layoutIfNeeded];
     }
     if (currentDisplayPhotoView) {
         [self.scrollView scrollRectToVisible:currentDisplayPhotoView.frame animated:NO];
@@ -74,6 +78,7 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
 #pragma mark ScrollView Delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.isResizingSubViews) return;
     CGFloat offsetX = scrollView.contentOffset.x;
     if (!(offsetX < 0 || offsetX + self.scrollViewWidth > self.scrollView.contentSize.width)) {
         WCPhotoView *firstPhotoViewInVisiblePhotos = [self.visiblePhotos firstObject];
@@ -124,6 +129,7 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
         }
         // 当前展示图片的索引
         self.displayPhotoIndex = ceil((offsetX  + self.scrollViewWidth / 2.0) / self.scrollViewWidth) - 1;
+        NSLog(@"%td", self.displayPhotoIndex);
     }
 }
 
