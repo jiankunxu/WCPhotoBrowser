@@ -52,7 +52,7 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
     [super layoutSubviews];
     self.resizingSubViews = YES;
     [self redisplayPhotoBrowser];
-    self.resizingSubViews = NO;
+    self.resizingSubViews = !self.isResizingSubViews;
 }
 
 /**
@@ -129,7 +129,6 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
         }
         // 当前展示图片的索引
         self.displayPhotoIndex = ceil((offsetX  + self.scrollViewWidth / 2.0) / self.scrollViewWidth) - 1;
-        NSLog(@"%td", self.displayPhotoIndex);
     }
 }
 
