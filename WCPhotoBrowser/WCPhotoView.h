@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class WCPhotoModel;
+@class WCPhotoModel, WCPhotoBrowserView;
 
 @interface WCPhotoView : UIView
 
@@ -25,6 +25,16 @@
  占位图
  */
 @property (nonatomic, strong) UIImage *placeholderImage;
+
+/**
+ 显示图片的控件
+ */
+@property (strong, nonatomic) UIImageView *photoImageView;
+
+/**
+ 图片浏览器
+ */
+@property (nonatomic, weak) WCPhotoBrowserView *photoBrowserView;
 
 /**
  准备复用的时候调用

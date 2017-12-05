@@ -14,7 +14,7 @@
 //#define kWCScreentHeight [UIScreen mainScreen].bounds.size.height
 static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
 
-@interface WCPhotoBrowserView () <UIScrollViewDelegate>
+@interface WCPhotoBrowserView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImage *placeholderImage;
@@ -143,6 +143,7 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
     WCPhotoView *photoView = self.reuseablePhotos.anyObject;
     if (photoView == nil) {
         photoView = [[[UINib nibWithNibName:@"WCPhotoView" bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
+        photoView.photoBrowserView = self;
     }
     if (photoView && ![self.scrollView.subviews containsObject:photoView]) {
         [self.scrollView addSubview:photoView];
@@ -156,7 +157,6 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
     }
     return photoView;
 }
-
 
 /**
  返回当前展示的photo
@@ -216,6 +216,11 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
 - (void)setDisplayPhotoIndex:(NSInteger)displayPhotoIndex {
     if (_displayPhotoIndex != displayPhotoIndex) {
         _displayPhotoIndex = displayPhotoIndex;
+        if ([_delegate respondsToSelector:@selector(photoBrowser:currentDisplayPhoto:currentDisplayPhotoIndex:)]) {
+            WCPhotoView *currentDisplayPhotoView = [self currentDisplayPhotoView];
+            UIImage *currentDisplayImage = currentDisplayPhotoView ? currentDisplayPhotoView.photoImageView.image : nil;
+            [_delegate photoBrowser:self currentDisplayPhoto:currentDisplayImage currentDisplayPhotoIndex:displayPhotoIndex];
+        }
         if ([_delegate respondsToSelector:@selector(photoBrowser:currentDisplayPhotoIndex:)]) {
             [_delegate photoBrowser:self currentDisplayPhotoIndex:displayPhotoIndex];
         }
@@ -233,11 +238,11 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc] init];
         _scrollView.pagingEnabled = YES;
-        _scrollView.backgroundColor = [UIColor blackColor];
         _scrollView.delegate = self;
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.alwaysBounceVertical = NO;
+        _scrollView.backgroundColor = [UIColor clearColor];
     }
     return _scrollView;
 }

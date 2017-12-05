@@ -15,6 +15,8 @@
 
 @interface WCPhotoBrowserViewController () <WCPhotoBrowserDelegate> {
     WCMaskAnimatedTransition *_maskAnimatedTransition;
+    UIImage *_currentDisplayImage;
+    NSInteger _currentDisplayImageIndex;
 }
 
 @property (weak, nonatomic) IBOutlet WCPhotoBrowserView *photoBrowserView;
@@ -59,6 +61,10 @@
 }
 
 - (void)commonInit {
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    _currentDisplayImage = nil;
+    _currentDisplayImageIndex = 0;
+    _showStatusBar = NO;
     _displayPhotoOrderInfo = NO;
     _displayPageControl = NO;
 }
@@ -70,11 +76,17 @@
     [self setupNavigationBar];
     [self setupPhotoOrderLabel];
     [self setupPhotoPageControl];
-    self.photoBrowserView.delegate = self;
+    [self setupPhotoBrowser];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self hideNavigationBarView];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self showNavigationBarView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -105,6 +117,24 @@
     [[UIViewController topViewController] presentViewController:self animated:YES completion:nil];
 }
 
+#pragma mark - UI
+
+- (void)setupPhotoBrowser {
+    self.photoBrowserView.delegate = self;
+    self.photoBrowserView.backgroundColor = [UIColor blackColor];
+    // 以下三属性只针对图片下拉时视具体情况调用
+    __weak typeof(self) weakSelf = self;
+    self.photoBrowserView.photoBrowserWillAppear = ^{
+        [weakSelf showNavigationBarView];
+    };
+    self.photoBrowserView.photoBrowserWillDisappear = ^{
+        [weakSelf hideNavigationBarView];
+    };
+    self.photoBrowserView.photoBrowserDidDisappear = ^{
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+    };
+}
+
 - (void)setupNavigationBar {
     self.navigationBarView.backgroundColor = [UIColor clearColor];
     [self.cancleButton setImage:[UIImage wc_imageNamed:@"wc_photobrowser_cancle" bundleName:@"WCPhotoBrowser"] forState:UIControlStateNormal];
@@ -133,6 +163,47 @@
     }
 }
 
+- (void)showNavigationBarView {
+    if (self.navigationBarView.hidden) {
+        __weak typeof(self)weakSelf = self;
+        [UIView animateWithDuration:0.25 animations:^{
+            weakSelf.navigationBarView.hidden = NO;
+        }];
+    }
+}
+
+- (void)hideNavigationBarView {
+    if (!self.navigationBarView.hidden) {
+        __weak typeof(self)weakSelf = self;
+        [UIView animateWithDuration:0.25 animations:^{
+            weakSelf.navigationBarView.hidden = YES;
+        }];
+    }
+}
+
+#pragma mark - Long Press Gesture
+
+- (void)handleLongPressGesture:(UIGestureRecognizer *)gestureRecognizer {
+    if (self.longPressImageCallback) {
+        self.longPressImageCallback(self, _currentDisplayImage, _currentDisplayImageIndex);
+    }
+    
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    if (self.alertActions.count > 0) {
+        for (UIAlertAction *alertAction in self.alertActions) {
+            [alertController addAction:alertAction];
+        }
+    }
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alertController addAction:cancleAction];
+    [self presentViewController:alertController animated:YES completion:^{
+        
+    }];
+}
+
 #pragma mark PhotoBrowser Delegate
 
 - (NSInteger)numberOfPhotosInPhotoBrowser:(WCPhotoBrowserView *)photoBrowser {
@@ -143,12 +214,14 @@
     return [self.images objectAtIndex:index];
 }
 
-- (void)photoBrowser:(WCPhotoBrowserView *)photoBrowser currentDisplayPhotoIndex:(NSInteger)index {
+- (void)photoBrowser:(WCPhotoBrowserView *)photoBrowser currentDisplayPhoto:(UIImage *)currentDisplayPhoto currentDisplayPhotoIndex:(NSInteger)currentDisplayPhotoIndex {
+    _currentDisplayImage = currentDisplayPhoto;
+    _currentDisplayImageIndex = currentDisplayPhotoIndex;
     if (self.displayPhotoOrderInfo) {
-        [self.photoOrderLabel setText:[NSString stringWithFormat:@"%td/%td", index + 1, self.images.count]];
+        [self.photoOrderLabel setText:[NSString stringWithFormat:@"%td/%td", currentDisplayPhotoIndex + 1, self.images.count]];
     }
     if (self.displayPageControl) {
-        self.photoPageControl.currentPage = index;
+        self.photoPageControl.currentPage = currentDisplayPhotoIndex;
     }
 }
 
@@ -171,7 +244,7 @@
 - (void)setNetworkImages:(NSArray *)networkImages {
     _networkImages = networkImages;
     if (_images == nil && networkImages.count > 0) {
-        NSMutableArray *images = [NSMutableArray arrayWithCapacity:networkImages.count];
+        NSMutableArray<WCPhotoModel *> *images = [NSMutableArray arrayWithCapacity:networkImages.count];
         for (int i = 0; i < networkImages.count; i ++) {
             WCPhotoModel *photoModel = [[WCPhotoModel alloc] initWithImageURL:[networkImages objectAtIndex:i]];
             [images addObject:photoModel];
@@ -183,7 +256,7 @@
 - (void)setLocalImages:(NSArray<UIImage *> *)localImages {
     _localImages = localImages;
     if (_images == nil && localImages.count > 0) {
-        NSMutableArray *images = [NSMutableArray arrayWithCapacity:localImages.count];
+        NSMutableArray<WCPhotoModel *> *images = [NSMutableArray arrayWithCapacity:localImages.count];
         for (int i = 0; i < _localImages.count; i ++) {
             id image = [_localImages objectAtIndex:i];
             if ([image isKindOfClass:[UIImage class]]) {
@@ -203,6 +276,14 @@
 - (void)setDisplayPageControl:(BOOL)displayPageControl {
     _displayPageControl = displayPageControl;
     [self setupPhotoPageControl];
+}
+
+- (void)setLongPressGestureEnabled:(BOOL)longPressGestureEnabled {
+    _longPressGestureEnabled = longPressGestureEnabled;
+    if (longPressGestureEnabled) {
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
+        [self.view addGestureRecognizer:longPressGesture];
+    }
 }
 
 @end

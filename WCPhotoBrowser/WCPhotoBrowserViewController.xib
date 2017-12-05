@@ -29,10 +29,10 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEU-Wf-qEP" userLabel="Photo Browser" customClass="WCPhotoBrowserView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="UEU-Wf-qEP" secondAttribute="bottom" id="4Jc-xB-gPK"/>
                         <constraint firstItem="UEU-Wf-qEP" firstAttribute="top" secondItem="vGo-bN-loR" secondAttribute="top" id="KCv-j1-TLf"/>
@@ -56,10 +56,10 @@
                         <constraint firstItem="zAs-Oy-fHm" firstAttribute="centerY" secondItem="AB8-YI-9T8" secondAttribute="centerY" id="yOS-eC-fR5"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inY-09-kzP" userLabel="Navigagtion Bar View">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inY-09-kzP" userLabel="Navigagtion Bar View">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahv-bv-Nc6" userLabel="Cancle Button">
+                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahv-bv-Nc6" userLabel="Cancle Button">
                             <rect key="frame" x="0.0" y="20" width="44" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="Asc-s3-B5L"/>
@@ -75,7 +75,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.70163584369999998" blue="0.087095782570000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="A8D-sj-wNb" firstAttribute="centerY" secondItem="ahv-bv-Nc6" secondAttribute="centerY" id="1wg-2h-YoO"/>
                         <constraint firstAttribute="height" constant="64" id="JVg-qQ-aM5"/>
@@ -86,7 +86,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="vGo-bN-loR" secondAttribute="trailing" id="1Uj-aJ-Vo3"/>
                 <constraint firstItem="inY-09-kzP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5IK-M3-ZEY"/>

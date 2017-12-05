@@ -49,6 +49,15 @@
 - (void)photoBrowser:(WCPhotoBrowserView *)photoBrowser currentDisplayPhotoIndex:(NSInteger)index;
 
 /**
+ 当展示图片改变时回调
+
+ @param photoBrowser 图片浏览器
+ @param currentDisplayPhoto 当前展示图片
+ @param currentDisplayPhotoIndex 当前展示图片的索引
+ */
+- (void)photoBrowser:(WCPhotoBrowserView *)photoBrowser currentDisplayPhoto:(UIImage *)currentDisplayPhoto currentDisplayPhotoIndex:(NSInteger)currentDisplayPhotoIndex;
+
+/**
  设置各个图片之间的间隙，默认为20
 
  @param photoBrowser 图片浏览器
@@ -69,5 +78,24 @@
 @interface WCPhotoBrowserView : UIView
 
 @property (nonatomic, weak) id<WCPhotoBrowserDelegate> delegate;
+
+// -------------------------- start --------------------------
+// 以下三个属性只针对ScrollView的panGesture下拉
+/**
+ 图片浏览器即将显示（图片下拉距离不够，图片浏览器恢复初始状态）
+ */
+@property (nonatomic, copy) void(^photoBrowserWillAppear)(void);
+
+/**
+ 图片浏览器即将消失（只要下拉预示着图片浏览器即将消失）
+ */
+@property (nonatomic, copy) void(^photoBrowserWillDisappear)(void);
+
+/**
+ 图片浏览器已经消失（下拉距离到了临界值，图片浏览器消失）
+ */
+@property (nonatomic, copy) void(^photoBrowserDidDisappear)(void);
+
+// -------------------------- end --------------------------
 
 @end

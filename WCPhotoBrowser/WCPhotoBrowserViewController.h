@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@class WCPhotoModel;
+@class WCPhotoBrowserViewController, WCPhotoModel;
+
+typedef void(^WCWhenLongPressImage)(WCPhotoBrowserViewController *photoBrowserViewController, UIImage *currentDisplayImage, NSInteger currentDisplayImageIndex);
 
 @interface WCPhotoBrowserViewController : UIViewController
 
@@ -17,7 +19,7 @@
 @property (nonatomic, assign) BOOL showStatusBar;
 
 /**
- 是否显示导航栏上（1/6）的提示，默认隐藏。
+ 是否显示导航栏上的提示(例如：1/6)，默认隐藏。
  */
 @property (nonatomic, assign) BOOL displayPhotoOrderInfo;
 
@@ -45,6 +47,18 @@
  首次展示图片的index，默认为0
  */
 @property (nonatomic, assign) NSInteger firstDisplayPhotoIndex;
+
+/**
+ 是否支持长按手势
+ */
+@property (nonatomic, assign) BOOL longPressGestureEnabled;
+
+/**
+ 长按弹出底部的选择框
+ */
+@property (nonatomic, strong) NSArray<UIAlertAction *> *alertActions;
+
+@property (nonatomic, copy) WCWhenLongPressImage longPressImageCallback;
 
 /**
  要展示的图片
