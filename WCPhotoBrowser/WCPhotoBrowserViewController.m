@@ -13,6 +13,12 @@
 #import "UIViewController+TopViewController.h"
 #import "WCMaskAnimatedTransition.h"
 
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREENT_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_IPHONE_X (IS_IPHONE && SCREENT_MAX_LENGTH == 812.0)
+
 @interface WCPhotoBrowserViewController () <WCPhotoBrowserDelegate> {
     UILongPressGestureRecognizer *_longPressGesture;
     WCMaskAnimatedTransition *_maskAnimatedTransition;
@@ -24,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancleButton;
 @property (weak, nonatomic) IBOutlet UILabel *photoOrderLabel;
 @property (weak, nonatomic) IBOutlet UIPageControl *photoPageControl;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *navigationBarViewTopConstraint;
+
 
 @end
 
@@ -82,10 +90,18 @@
 }
 #pragma mark - life cycle
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (IS_IPHONE_X) {
+        self.navigationBarViewTopConstraint.constant = 44.0;
+    } else {
+        self.navigationBarViewTopConstraint.constant = 20.0;
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self showNavigationBarView];
-    NSLog(@"%@", NSStringFromCGRect(self.view.bounds));
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -142,9 +158,10 @@
     self.photoBrowserView.photoBrowserDidDisappear = ^{
         [weakSelf dismissViewController];
     };
-    self.photoBrowserView.photoBrowserBackgroundColorDidChange = ^(CGFloat photoBrowserBackgroundColorAlpha, CGFloat photoBrowserViewAlpha) {
+    self.photoBrowserView.photoBrowserBackgroundColorAlphaDidChange = ^(CGFloat photoBrowserBackgroundColorAlpha, CGFloat photoBrowserViewAlpha) {
         weakSelf.view.backgroundColor = [UIColor colorWithWhite:0 alpha:photoBrowserBackgroundColorAlpha];
-        weakSelf.view.alpha = photoBrowserViewAlpha;
+        weakSelf.view.alpha = MIN(weakSelf.view.alpha, photoBrowserViewAlpha);
+        NSLog(@"%s -- %f", __func__, weakSelf.view.alpha);
     };
 }
 

@@ -107,7 +107,7 @@
 /**
  当背景颜色的alpha值改变时调用
  */
-@property (nonatomic, copy) void(^photoBrowserBackgroundColorDidChange)(CGFloat photoBrowserBackgroundColorAlpha, CGFloat photoBrowserViewAlpha);
+@property (nonatomic, copy) void(^photoBrowserBackgroundColorAlphaDidChange)(CGFloat photoBrowserBackgroundColorAlpha, CGFloat photoBrowserViewAlpha);
 
 // -------------------------- end --------------------------
 

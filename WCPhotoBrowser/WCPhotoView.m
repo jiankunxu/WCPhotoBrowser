@@ -51,6 +51,9 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
     self.currentZoomScale = kDefaultZoomScaleForPhotoScrollView;
     self.photoScrollView.delegate = self;
     [self resetPhotoScrollViewState];
+    if (@available(iOS 11.0, *)) {
+        self.photoScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     [self.photoScrollView.panGestureRecognizer addTarget:self action:@selector(handlePhotoScrollViewPanGesture:)];
 }
 
@@ -58,6 +61,7 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
     [super layoutSubviews];
     self.photoImageView.frame = self.photoScrollView.bounds;
     self.activityIndicatorView.center = self.photoImageView.center;
+    self.photoScrollView.contentOffset = CGPointZero;
     self.photoScrollView.contentSize = CGSizeMake(self.photoImageView.bounds.size.width, self.photoImageView.bounds.size.height + 1);
 }
 
@@ -140,7 +144,7 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
                 photoImageFrame.origin.y = photoScrollViewHeight;
                 weakSelf.photoImageView.frame = photoImageFrame;
             } completion:^(BOOL finished) {
-                weakSelf.photoBrowserView.photoBrowserBackgroundColorDidChange(0.0, 0.0);
+                weakSelf.photoBrowserView.photoBrowserBackgroundColorAlphaDidChange(0.0, 0.0);
                 weakSelf.photoBrowserView.photoBrowserDidDisappear();
             }];
         }
@@ -158,7 +162,7 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
     // 下拉距离小于某一阀值时，调整Photobrowser背景颜色的alpha值
     if (ABS(scrollView.contentOffset.y) < kTresholdPanLengthForScrollView) {
         CGFloat alpha = 1 - ABS(scrollView.contentOffset.y / (kTresholdPanLengthForScrollView + 50));
-        self.photoBrowserView.photoBrowserBackgroundColorDidChange(alpha, 1.0);
+        self.photoBrowserView.photoBrowserBackgroundColorAlphaDidChange(alpha, 1.0);
     }
 }
 

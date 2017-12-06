@@ -30,8 +30,9 @@
     WCPhotoBrowserViewController *photoBrowser = [[WCPhotoBrowserViewController alloc] init];
     photoBrowser.displayPageControl = NO;
     photoBrowser.displayPhotoOrderInfo = YES;
-//    photoBrowser.showStatusBar = NO;
     NSArray *images = @[
+                        @"https://imgcloud4.fblife.com/FrFQVSZikSPnYYd1nNVKwUFruggO",
+                        @"https://imgcloud4.fblife.com/FvR5-J_jJcJ-Bm6wMF6duYLLvvTb",
                         @"https://imgcloud4.fblife.com/client_uploads/images/1368229/C6E0103BE0266BE12B8563685DE120E6",
                         @"https://imgcloud4.fblife.com/client_uploads/images/1368229/72073CE5BA2D0886B6E04F609ACE8A73",
                         @"https://imgcloud4.fblife.com/client_uploads/images/1368229/CEA3E04047B94C071822CAC72BE04F36",

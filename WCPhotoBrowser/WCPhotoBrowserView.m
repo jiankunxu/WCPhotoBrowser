@@ -37,6 +37,7 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
         self.placeholderImage = placeholderImage;
     }
     if ([_delegate respondsToSelector:@selector(firstDisplayPhotoIndexInPhotoBrowser:)]) {
+        _displayPhotoIndex = -1;
         NSInteger displayPhotoIndex = [_delegate firstDisplayPhotoIndexInPhotoBrowser:self];
         self.displayPhotoIndex = [self safeIndexForPhotoBrowserWithIndex:displayPhotoIndex];
     }
