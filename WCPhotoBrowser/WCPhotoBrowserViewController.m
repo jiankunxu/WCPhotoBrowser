@@ -61,10 +61,9 @@
 }
 
 - (void)commonInit {
-    self.automaticallyAdjustsScrollViewInsets = NO;
     _currentDisplayImage = nil;
     _currentDisplayImageIndex = 0;
-    _showStatusBar = NO;
+    _showStatusBar = YES;
     _firstDisplayPhotoIndex = 0;
     _displayPhotoOrderInfo = NO;
     _displayPageControl = NO;
@@ -75,7 +74,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self setupNavigationBar];
     [self setupPhotoOrderLabel];
     [self setupPhotoPageControl];
@@ -86,6 +85,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self showNavigationBarView];
+    NSLog(@"%@", NSStringFromCGRect(self.view.bounds));
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -103,7 +103,7 @@
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 - (void)show {
@@ -129,9 +129,9 @@
 
 - (void)setupPhotoBrowser {
     self.photoBrowserView.singleTapGestureEnabled = self.singleTapGestureEnabled;
-    self.photoBrowserView.backgroundColor = [UIColor blackColor];
+//    self.photoBrowserView.backgroundColor = [UIColor blackColor];
     self.photoBrowserView.delegate = self;
-    // 以下三属性只针对图片下拉时视具体情况调用
+    // 以下属性只针对图片下拉时视具体情况调用
     __weak typeof(self) weakSelf = self;
     self.photoBrowserView.photoBrowserWillAppear = ^{
         [weakSelf showNavigationBarView];
@@ -141,6 +141,10 @@
     };
     self.photoBrowserView.photoBrowserDidDisappear = ^{
         [weakSelf dismissViewController];
+    };
+    self.photoBrowserView.photoBrowserBackgroundColorDidChange = ^(CGFloat photoBrowserBackgroundColorAlpha, CGFloat photoBrowserViewAlpha) {
+        weakSelf.view.backgroundColor = [UIColor colorWithWhite:0 alpha:photoBrowserBackgroundColorAlpha];
+        weakSelf.view.alpha = photoBrowserViewAlpha;
     };
 }
 

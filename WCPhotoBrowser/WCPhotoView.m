@@ -56,9 +56,9 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.photoImageView.frame = self.photoScrollView.frame;
+    self.photoImageView.frame = self.photoScrollView.bounds;
     self.activityIndicatorView.center = self.photoImageView.center;
-        self.photoScrollView.contentSize = CGSizeMake(self.photoImageView.bounds.size.width, self.photoImageView.bounds.size.height + 1);
+    self.photoScrollView.contentSize = CGSizeMake(self.photoImageView.bounds.size.width, self.photoImageView.bounds.size.height + 1);
 }
 
 - (void)prepareForReuse {
@@ -123,6 +123,7 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
 - (void)handlePhotoScrollViewPanGesture:(UIGestureRecognizer *)gesture {
     if (self.photoScrollView.zoomScale != kDefaultZoomScaleForPhotoScrollView) return;
     CGFloat offsetY = self.photoScrollView.contentOffset.y;
+//    NSLog(@"%f ---- %f", offsetY, self.photoScrollView.contentInset.top);
     if (gesture.state == UIGestureRecognizerStateEnded) {
         __weak typeof(self) weakSelf = self;
         if (ABS(offsetY) < kTresholdPanLengthForScrollView) {
@@ -139,7 +140,7 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
                 photoImageFrame.origin.y = photoScrollViewHeight;
                 weakSelf.photoImageView.frame = photoImageFrame;
             } completion:^(BOOL finished) {
-                weakSelf.photoBrowserView.alpha = 0;
+                weakSelf.photoBrowserView.photoBrowserBackgroundColorDidChange(0.0, 0.0);
                 weakSelf.photoBrowserView.photoBrowserDidDisappear();
             }];
         }
@@ -153,10 +154,11 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
 #pragma mark - ScrollView Delegagte
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSLog(@"%f -- %@", scrollView.contentOffset.y, NSStringFromUIEdgeInsets(scrollView.contentInset));
     // 下拉距离小于某一阀值时，调整Photobrowser背景颜色的alpha值
     if (ABS(scrollView.contentOffset.y) < kTresholdPanLengthForScrollView) {
-        CGFloat alpha = 1 - ABS(scrollView.contentOffset.y / (kTresholdPanLengthForScrollView + 50.0));
-        self.photoBrowserView.backgroundColor = [UIColor colorWithWhite:0 alpha:alpha];
+        CGFloat alpha = 1 - ABS(scrollView.contentOffset.y / (kTresholdPanLengthForScrollView + 50));
+        self.photoBrowserView.photoBrowserBackgroundColorDidChange(alpha, 1.0);
     }
 }
 

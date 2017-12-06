@@ -88,7 +88,7 @@
 @property (nonatomic, assign) BOOL singleTapGestureEnabled;
 
 // -------------------------- start --------------------------
-// 以下三个属性只针对ScrollView的panGesture下拉
+// 以下个属性只针对ScrollView的panGesture下拉
 /**
  图片浏览器即将显示（图片下拉距离不够，图片浏览器恢复初始状态）
  */
@@ -103,6 +103,11 @@
  图片浏览器已经消失（下拉距离到了临界值，图片浏览器消失）
  */
 @property (nonatomic, copy) void(^photoBrowserDidDisappear)(void);
+
+/**
+ 当背景颜色的alpha值改变时调用
+ */
+@property (nonatomic, copy) void(^photoBrowserBackgroundColorDidChange)(CGFloat photoBrowserBackgroundColorAlpha, CGFloat photoBrowserViewAlpha);
 
 // -------------------------- end --------------------------
 
