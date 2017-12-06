@@ -31,13 +31,30 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
 
 @implementation WCPhotoBrowserView
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)commonInit {
+    _displayPhotoIndex = -1;
+}
+
 - (void)setupInterface {
     if ([_delegate respondsToSelector:@selector(placeholderImageForPhotoBrowser:)]) {
         UIImage *placeholderImage = [_delegate placeholderImageForPhotoBrowser:self];
         self.placeholderImage = placeholderImage;
     }
     if ([_delegate respondsToSelector:@selector(firstDisplayPhotoIndexInPhotoBrowser:)]) {
-        _displayPhotoIndex = -1;
         NSInteger displayPhotoIndex = [_delegate firstDisplayPhotoIndexInPhotoBrowser:self];
         self.displayPhotoIndex = [self safeIndexForPhotoBrowserWithIndex:displayPhotoIndex];
     }

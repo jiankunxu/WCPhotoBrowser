@@ -145,7 +145,6 @@
 
 - (void)setupPhotoBrowser {
     self.photoBrowserView.singleTapGestureEnabled = self.singleTapGestureEnabled;
-//    self.photoBrowserView.backgroundColor = [UIColor blackColor];
     self.photoBrowserView.delegate = self;
     // 以下属性只针对图片下拉时视具体情况调用
     __weak typeof(self) weakSelf = self;
@@ -159,7 +158,6 @@
         [weakSelf dismissViewController];
     };
     self.photoBrowserView.photoBrowserBackgroundColorAlphaDidChange = ^(CGFloat photoBrowserBackgroundColorAlpha, CGFloat photoBrowserViewAlpha) {
-        [weakSelf setNeedsStatusBarAppearanceUpdate];
         weakSelf.view.backgroundColor = [UIColor colorWithWhite:0 alpha:photoBrowserBackgroundColorAlpha];
         weakSelf.view.alpha = MIN(weakSelf.view.alpha, photoBrowserViewAlpha);
     };
