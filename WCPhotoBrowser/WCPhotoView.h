@@ -37,6 +37,11 @@
 @property (nonatomic, weak) WCPhotoBrowserView *photoBrowserView;
 
 /**
+ 是否允许单击dimiss
+ */
+@property (nonatomic, assign) BOOL singleTapGestureEnabled;
+
+/**
  准备复用的时候调用
  */
 - (void)prepareForReuse;

@@ -143,6 +143,7 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
     WCPhotoView *photoView = self.reuseablePhotos.anyObject;
     if (photoView == nil) {
         photoView = [[[UINib nibWithNibName:@"WCPhotoView" bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
+        photoView.singleTapGestureEnabled = self.singleTapGestureEnabled;
         photoView.photoBrowserView = self;
     }
     if (photoView && ![self.scrollView.subviews containsObject:photoView]) {

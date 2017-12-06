@@ -16,7 +16,6 @@
 @interface WCPhotoBrowserViewController () <WCPhotoBrowserDelegate> {
     UILongPressGestureRecognizer *_longPressGesture;
     WCMaskAnimatedTransition *_maskAnimatedTransition;
-    UIImage *_currentDisplayImage;
     NSInteger _currentDisplayImageIndex;
 }
 
@@ -66,8 +65,11 @@
     _currentDisplayImage = nil;
     _currentDisplayImageIndex = 0;
     _showStatusBar = NO;
+    _firstDisplayPhotoIndex = 0;
     _displayPhotoOrderInfo = NO;
     _displayPageControl = NO;
+    _longPressGestureEnabled = NO;
+    _singleTapGestureEnabled = YES;
 }
 
 - (void)viewDidLoad {
@@ -79,15 +81,16 @@
     [self setupPhotoPageControl];
     [self setupPhotoBrowser];
 }
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self hideNavigationBarView];
-}
+#pragma mark - life cycle
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self showNavigationBarView];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self hideNavigationBarView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -118,11 +121,16 @@
     [[UIViewController topViewController] presentViewController:self animated:YES completion:nil];
 }
 
+- (void)dismissViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - UI
 
 - (void)setupPhotoBrowser {
-    self.photoBrowserView.delegate = self;
+    self.photoBrowserView.singleTapGestureEnabled = self.singleTapGestureEnabled;
     self.photoBrowserView.backgroundColor = [UIColor blackColor];
+    self.photoBrowserView.delegate = self;
     // 以下三属性只针对图片下拉时视具体情况调用
     __weak typeof(self) weakSelf = self;
     self.photoBrowserView.photoBrowserWillAppear = ^{
@@ -132,7 +140,7 @@
         [weakSelf hideNavigationBarView];
     };
     self.photoBrowserView.photoBrowserDidDisappear = ^{
-        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        [weakSelf dismissViewController];
     };
 }
 
@@ -152,7 +160,8 @@
 }
 
 - (void)setupPhotoPageControl {
-    if (self.displayPageControl) {
+    // 若单张图片则不现实底部的pageControl
+    if (self.displayPageControl && self.images.count > 1) {
         self.photoPageControl.hidden = NO;
         self.photoPageControl.hidesForSinglePage = YES;
         self.photoPageControl.defersCurrentPageDisplay = YES;
@@ -198,6 +207,17 @@
     }
 }
 
+#pragma mark - TapGesture
+
+- (void)handleTapGesture:(UIGestureRecognizer *)gestureRecognizer {
+    __weak typeof(self) weakSelf = self;
+    [UIView animateWithDuration:0.25 animations:^{
+        weakSelf.navigationBarView.hidden = YES;
+    } completion:^(BOOL finished) {
+        [weakSelf dismissViewController];
+    }];
+}
+
 #pragma mark PhotoBrowser Delegate
 
 - (NSInteger)numberOfPhotosInPhotoBrowser:(WCPhotoBrowserView *)photoBrowser {
@@ -230,7 +250,7 @@
 #pragma mark IBAction
 
 - (IBAction)cancleButtonDidClicked:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewController];
 }
 
 #pragma mark - getter and setter
@@ -272,6 +292,7 @@
     [self setupPhotoPageControl];
 }
 
+// 长按手势
 - (void)setLongPressGestureEnabled:(BOOL)longPressGestureEnabled {
     _longPressGestureEnabled = longPressGestureEnabled;
     if (longPressGestureEnabled) {
@@ -292,7 +313,7 @@
     }
 }
 
-- (void)setLongPressGestureTriggerBlock:(WCLongPressGestureTrigger)longPressGestureTriggerBlock {
+- (void)setLongPressGestureTriggerBlock:(WCPhotoBrowserLongPressGestureTrigger)longPressGestureTriggerBlock {
     _longPressGestureTriggerBlock = longPressGestureTriggerBlock;
     if (_longPressGestureTriggerBlock) {
         [self setLongPressGestureEnabled:YES];

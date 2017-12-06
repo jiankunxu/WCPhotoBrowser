@@ -18,7 +18,7 @@
     return self;
 }
 
-- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContet {
     return 0.25;
 }
 
@@ -41,6 +41,7 @@
         }];
     }
     if (fromVC.isBeingDismissed) {
+        fromView.alpha = 1.0;
         [UIView animateWithDuration:duration animations:^{
             fromView.alpha = 0;
         } completion:^(BOOL finished) {

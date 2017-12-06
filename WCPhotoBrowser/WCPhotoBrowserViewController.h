@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class WCPhotoBrowserViewController, WCPhotoModel;
 
-typedef void(^WCLongPressGestureTrigger)(WCPhotoBrowserViewController *photoBrowserViewController, UIImage *currentDisplayImage, NSInteger currentDisplayImageIndex);
+typedef void(^WCPhotoBrowserLongPressGestureTrigger)(WCPhotoBrowserViewController *photoBrowserViewController, UIImage *currentDisplayImage, NSInteger currentDisplayImageIndex);
 
 @interface WCPhotoBrowserViewController : UIViewController
 
@@ -49,19 +49,29 @@ typedef void(^WCLongPressGestureTrigger)(WCPhotoBrowserViewController *photoBrow
 @property (nonatomic, assign) NSInteger firstDisplayPhotoIndex;
 
 /**
- 是否支持长按手势
+ 点击屏幕消失，默认为YES
+ */
+@property (nonatomic, assign) BOOL singleTapGestureEnabled;
+
+/**
+ 是否支持长按手势，默认为NO
  */
 @property (nonatomic, assign) BOOL longPressGestureEnabled;
 
 /**
- 长按弹出底部的选择框
+ 长按弹出底部的选择框，默认为nil
  */
 @property (nonatomic, strong) NSArray<UIAlertAction *> *alertActions;
 
 /**
  长按手势触发时回调block
  */
-@property (nonatomic, copy) WCLongPressGestureTrigger longPressGestureTriggerBlock;
+@property (nonatomic, copy) WCPhotoBrowserLongPressGestureTrigger longPressGestureTriggerBlock;
+
+/**
+ 当前展示的图片
+ */
+@property (nonatomic, strong) UIImage *currentDisplayImage;
 
 /**
  要展示的图片

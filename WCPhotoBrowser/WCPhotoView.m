@@ -17,7 +17,10 @@ static const CGFloat kMinimumZoomScaleForPhotoScrollView = 1.0;
 static const CGFloat kDefaultZoomScaleForPhotoScrollView = 1.0;
 static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
 
-@interface WCPhotoView () <UIScrollViewDelegate>
+@interface WCPhotoView () <UIScrollViewDelegate> {
+    UITapGestureRecognizer *_singleTapGesture;
+    UITapGestureRecognizer *_doubleTapGesure;
+}
 
 @property (weak, nonatomic) IBOutlet UIScrollView *photoScrollView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
@@ -40,6 +43,7 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
     [self.photoImageView addSubview:self.activityIndicatorView];
     UITapGestureRecognizer *doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapGesture:)];
     doubleTapGesture.numberOfTapsRequired = 2;
+    _doubleTapGesure = doubleTapGesture;
     [self.photoImageView addGestureRecognizer:doubleTapGesture];
     self.photoScrollView.maximumZoomScale = kMaximumZoomScaleForPhotoScrollView;
     self.photoScrollView.minimumZoomScale = kMinimumZoomScaleForPhotoScrollView;
@@ -83,6 +87,25 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
     } else if (photoModel.localImage) {
         [self.photoImageView setImage:photoModel.localImage];
     }
+}
+
+- (void)setSingleTapGestureEnabled:(BOOL)singleTapGestureEnabled {
+    _singleTapGestureEnabled = singleTapGestureEnabled;
+    if (_singleTapGestureEnabled && _singleTapGesture == nil) {
+        UITapGestureRecognizer *singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTapGesture:)];
+        singleTapGesture.numberOfTapsRequired = 1;
+        singleTapGesture.delaysTouchesBegan = YES;
+        _singleTapGesture = singleTapGesture;
+        [_singleTapGesture requireGestureRecognizerToFail:_doubleTapGesure];
+        [self.photoImageView addGestureRecognizer:singleTapGesture];
+    }
+    if (!_singleTapGestureEnabled && _singleTapGesture){
+        [self.photoImageView removeGestureRecognizer:_singleTapGesture];
+    }
+}
+
+- (void)handleSingleTapGesture:(UIGestureRecognizer *)gesture {
+    self.photoBrowserView.photoBrowserDidDisappear();
 }
 
 - (void)doubleTapGesture:(UIGestureRecognizer *)gesture {

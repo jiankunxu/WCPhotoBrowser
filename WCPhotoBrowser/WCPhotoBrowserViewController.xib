@@ -29,7 +29,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEU-Wf-qEP" userLabel="Photo Browser" customClass="WCPhotoBrowserView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -51,7 +51,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="37" id="i5W-ql-tTK"/>
+                        <constraint firstAttribute="height" secondItem="zAs-Oy-fHm" secondAttribute="height" id="ca3-8S-aat"/>
                         <constraint firstItem="zAs-Oy-fHm" firstAttribute="centerX" secondItem="AB8-YI-9T8" secondAttribute="centerX" id="kJl-Pl-687"/>
                         <constraint firstItem="zAs-Oy-fHm" firstAttribute="centerY" secondItem="AB8-YI-9T8" secondAttribute="centerY" id="yOS-eC-fR5"/>
                     </constraints>

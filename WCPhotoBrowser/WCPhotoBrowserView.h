@@ -77,7 +77,15 @@
 
 @interface WCPhotoBrowserView : UIView
 
+/**
+ photoBrowser的delegate
+ */
 @property (nonatomic, weak) id<WCPhotoBrowserDelegate> delegate;
+
+/**
+ 是否允许单击dimiss
+ */
+@property (nonatomic, assign) BOOL singleTapGestureEnabled;
 
 // -------------------------- start --------------------------
 // 以下三个属性只针对ScrollView的panGesture下拉
