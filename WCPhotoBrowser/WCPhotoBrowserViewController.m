@@ -325,16 +325,16 @@
     }
 }
 
-- (void)setAlertActions:(NSArray<UIAlertAction *> *)alertActions {
-    _alertActions = alertActions;
-    if (_alertActions.count > 0) {
+- (void)setLongPressGestureTriggerBlock:(WCPhotoBrowserLongPressGestureTrigger)longPressGestureTriggerBlock {
+    _longPressGestureTriggerBlock = longPressGestureTriggerBlock;
+    if (_longPressGestureTriggerBlock) {
         [self setLongPressGestureEnabled:YES];
     }
 }
 
-- (void)setLongPressGestureTriggerBlock:(WCPhotoBrowserLongPressGestureTrigger)longPressGestureTriggerBlock {
-    _longPressGestureTriggerBlock = longPressGestureTriggerBlock;
-    if (_longPressGestureTriggerBlock) {
+- (void)setAlertActions:(NSArray<UIAlertAction *> *)alertActions {
+    _alertActions = alertActions;
+    if (_alertActions.count > 0) {
         [self setLongPressGestureEnabled:YES];
     }
 }
