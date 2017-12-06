@@ -159,7 +159,8 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // 下拉距离小于某一阀值时，调整Photobrowser背景颜色的alpha值
     if (ABS(scrollView.contentOffset.y) < kTresholdPanLengthForScrollView) {
-        CGFloat alpha = 1 - ABS(scrollView.contentOffset.y / (kTresholdPanLengthForScrollView + 50));
+        CGFloat alphaOffset = 50.0;
+        CGFloat alpha = 1 - ABS(scrollView.contentOffset.y / (kTresholdPanLengthForScrollView + alphaOffset));
         self.photoBrowserView.photoBrowserBackgroundColorAlphaDidChange(alpha, 1.0);
     }
 }

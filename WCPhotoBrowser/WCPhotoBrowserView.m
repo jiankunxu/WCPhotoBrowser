@@ -10,8 +10,6 @@
 #import "WCPhotoModel.h"
 #import "WCPhotoView.h"
 
-//#define kWCScreentWidth [UIScreen mainScreen].bounds.size.width
-//#define kWCScreentHeight [UIScreen mainScreen].bounds.size.height
 static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
 
 @interface WCPhotoBrowserView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
