@@ -127,7 +127,6 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
 - (void)handlePhotoScrollViewPanGesture:(UIGestureRecognizer *)gesture {
     if (self.photoScrollView.zoomScale != kDefaultZoomScaleForPhotoScrollView) return;
     CGFloat offsetY = self.photoScrollView.contentOffset.y;
-//    NSLog(@"%f ---- %f", offsetY, self.photoScrollView.contentInset.top);
     if (gesture.state == UIGestureRecognizerStateEnded) {
         __weak typeof(self) weakSelf = self;
         if (ABS(offsetY) < kTresholdPanLengthForScrollView) {
@@ -158,7 +157,6 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
 #pragma mark - ScrollView Delegagte
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"%f -- %@", scrollView.contentOffset.y, NSStringFromUIEdgeInsets(scrollView.contentInset));
     // 下拉距离小于某一阀值时，调整Photobrowser背景颜色的alpha值
     if (ABS(scrollView.contentOffset.y) < kTresholdPanLengthForScrollView) {
         CGFloat alpha = 1 - ABS(scrollView.contentOffset.y / (kTresholdPanLengthForScrollView + 50));

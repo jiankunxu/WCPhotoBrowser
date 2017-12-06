@@ -159,9 +159,9 @@
         [weakSelf dismissViewController];
     };
     self.photoBrowserView.photoBrowserBackgroundColorAlphaDidChange = ^(CGFloat photoBrowserBackgroundColorAlpha, CGFloat photoBrowserViewAlpha) {
+        [weakSelf setNeedsStatusBarAppearanceUpdate];
         weakSelf.view.backgroundColor = [UIColor colorWithWhite:0 alpha:photoBrowserBackgroundColorAlpha];
         weakSelf.view.alpha = MIN(weakSelf.view.alpha, photoBrowserViewAlpha);
-        NSLog(@"%s -- %f", __func__, weakSelf.view.alpha);
     };
 }
 

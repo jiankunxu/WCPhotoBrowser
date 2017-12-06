@@ -41,7 +41,6 @@
         }];
     }
     if (fromVC.isBeingDismissed) {
-        fromView.alpha = 1.0;
         [UIView animateWithDuration:duration animations:^{
             fromView.alpha = 0;
         } completion:^(BOOL finished) {
