@@ -111,7 +111,7 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
         } else {
             // 下拉距离大于阀值，photoBrowser消失
             CGFloat photoScrollViewHeight = self.photoScrollView.bounds.size.height;
-            [UIView animateWithDuration:0.5 animations:^{
+            [UIView animateWithDuration:0.25 animations:^{
                 CGRect photoImageFrame = weakSelf.photoImageView.frame;
                 photoImageFrame.origin.y = photoScrollViewHeight;
                 weakSelf.photoImageView.frame = photoImageFrame;
@@ -132,7 +132,7 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // 下拉距离小于某一阀值时，调整Photobrowser背景颜色的alpha值
     if (ABS(scrollView.contentOffset.y) < kTresholdPanLengthForScrollView) {
-        CGFloat alpha = 1 - ABS(scrollView.contentOffset.y / kTresholdPanLengthForScrollView);
+        CGFloat alpha = 1 - ABS(scrollView.contentOffset.y / (kTresholdPanLengthForScrollView + 50.0));
         self.photoBrowserView.backgroundColor = [UIColor colorWithWhite:0 alpha:alpha];
     }
 }

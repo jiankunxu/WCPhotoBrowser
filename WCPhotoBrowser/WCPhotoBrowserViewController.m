@@ -14,6 +14,7 @@
 #import "WCMaskAnimatedTransition.h"
 
 @interface WCPhotoBrowserViewController () <WCPhotoBrowserDelegate> {
+    UILongPressGestureRecognizer *_longPressGesture;
     WCMaskAnimatedTransition *_maskAnimatedTransition;
     UIImage *_currentDisplayImage;
     NSInteger _currentDisplayImageIndex;
@@ -184,24 +185,17 @@
 #pragma mark - Long Press Gesture
 
 - (void)handleLongPressGesture:(UIGestureRecognizer *)gestureRecognizer {
-    if (self.longPressImageCallback) {
-        self.longPressImageCallback(self, _currentDisplayImage, _currentDisplayImageIndex);
-    }
-    
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    if (self.alertActions.count > 0) {
-        for (UIAlertAction *alertAction in self.alertActions) {
-            [alertController addAction:alertAction];
+    if (self.longPressGestureTriggerBlock) {
+        self.longPressGestureTriggerBlock(self, _currentDisplayImage, _currentDisplayImageIndex);
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        if (self.alertActions.count > 0) {
+            for (UIAlertAction *alertAction in self.alertActions) {
+                [alertController addAction:alertAction];
+            }
+            [self presentViewController:alertController animated:YES completion:nil];
         }
     }
-    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [alertController dismissViewControllerAnimated:YES completion:nil];
-    }];
-    [alertController addAction:cancleAction];
-    [self presentViewController:alertController animated:YES completion:^{
-        
-    }];
 }
 
 #pragma mark PhotoBrowser Delegate
@@ -283,6 +277,25 @@
     if (longPressGestureEnabled) {
         UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
         [self.view addGestureRecognizer:longPressGesture];
+        _longPressGesture = longPressGesture;
+    } else {
+        if (_longPressGesture) {
+            [self.view removeGestureRecognizer:_longPressGesture];
+        }
+    }
+}
+
+- (void)setAlertActions:(NSArray<UIAlertAction *> *)alertActions {
+    _alertActions = alertActions;
+    if (_alertActions.count > 0) {
+        [self setLongPressGestureEnabled:YES];
+    }
+}
+
+- (void)setLongPressGestureTriggerBlock:(WCLongPressGestureTrigger)longPressGestureTriggerBlock {
+    _longPressGestureTriggerBlock = longPressGestureTriggerBlock;
+    if (_longPressGestureTriggerBlock) {
+        [self setLongPressGestureEnabled:YES];
     }
 }
 

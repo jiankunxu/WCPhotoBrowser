@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class WCPhotoBrowserViewController, WCPhotoModel;
 
-typedef void(^WCWhenLongPressImage)(WCPhotoBrowserViewController *photoBrowserViewController, UIImage *currentDisplayImage, NSInteger currentDisplayImageIndex);
+typedef void(^WCLongPressGestureTrigger)(WCPhotoBrowserViewController *photoBrowserViewController, UIImage *currentDisplayImage, NSInteger currentDisplayImageIndex);
 
 @interface WCPhotoBrowserViewController : UIViewController
 
@@ -58,7 +58,10 @@ typedef void(^WCWhenLongPressImage)(WCPhotoBrowserViewController *photoBrowserVi
  */
 @property (nonatomic, strong) NSArray<UIAlertAction *> *alertActions;
 
-@property (nonatomic, copy) WCWhenLongPressImage longPressImageCallback;
+/**
+ 长按手势触发时回调block
+ */
+@property (nonatomic, copy) WCLongPressGestureTrigger longPressGestureTriggerBlock;
 
 /**
  要展示的图片
