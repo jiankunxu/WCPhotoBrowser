@@ -13,6 +13,7 @@
 #import "UIViewController+TopViewController.h"
 #import "WCMaskAnimatedTransition.h"
 
+#define STATUS_BAR_HEIGHT 20
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
 #define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
 #define SCREENT_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -96,7 +97,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (!IS_IPHONE_X && !self.showStatusBar) {
-        self.navigationBarViewTopConstraint.constant = -20.0;
+        self.navigationBarViewTopConstraint.constant -= STATUS_BAR_HEIGHT;
     }
 }
 
