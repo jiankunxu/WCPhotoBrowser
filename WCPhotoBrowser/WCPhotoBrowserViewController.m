@@ -78,6 +78,7 @@
     _singleTapGestureEnabled = YES;
     _currentDisplayImageIndex = 0;
     _firstDisplayPhotoIndex = 0;
+    _statusBarStyle = UIStatusBarStyleDefault;
 }
 
 - (void)viewDidLoad {
@@ -120,7 +121,7 @@
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
+    return self.statusBarStyle;
 }
 
 - (void)show {
