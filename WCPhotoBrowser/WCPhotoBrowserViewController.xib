@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,7 +14,7 @@
             <connections>
                 <outlet property="cancleButton" destination="ahv-bv-Nc6" id="nit-j6-TPA"/>
                 <outlet property="navigationBarView" destination="inY-09-kzP" id="Yq2-xy-d3W"/>
-                <outlet property="navigationBarViewTopConstraint" destination="DFl-Og-SnT" id="JbO-Jz-Etv"/>
+                <outlet property="navigationBarViewTopConstraint" destination="fbI-8K-Uty" id="Laq-QD-ksY"/>
                 <outlet property="photoBrowserView" destination="UEU-Wf-qEP" id="E0E-SV-MmD"/>
                 <outlet property="photoOrderLabel" destination="A8D-sj-wNb" id="g81-CB-Ptn"/>
                 <outlet property="photoPageControl" destination="zAs-Oy-fHm" id="jJ6-vd-ZO3"/>
@@ -93,14 +94,15 @@
                 <constraint firstAttribute="trailing" secondItem="vGo-bN-loR" secondAttribute="trailing" id="1Uj-aJ-Vo3"/>
                 <constraint firstItem="inY-09-kzP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3UV-bY-JiD"/>
                 <constraint firstAttribute="trailing" secondItem="inY-09-kzP" secondAttribute="trailing" id="AxF-GS-Ddd"/>
-                <constraint firstItem="inY-09-kzP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="DFl-Og-SnT"/>
                 <constraint firstItem="vGo-bN-loR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ios-Pg-oNv"/>
                 <constraint firstAttribute="bottom" secondItem="vGo-bN-loR" secondAttribute="bottom" id="Ne5-KY-0th"/>
                 <constraint firstItem="vGo-bN-loR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="TLe-Wm-DEo"/>
                 <constraint firstItem="AB8-YI-9T8" firstAttribute="leading" secondItem="vGo-bN-loR" secondAttribute="leading" id="VFH-lu-lGk"/>
                 <constraint firstItem="vGo-bN-loR" firstAttribute="bottom" secondItem="AB8-YI-9T8" secondAttribute="bottom" id="aJP-dE-HMn"/>
+                <constraint firstItem="EPw-KN-Bzt" firstAttribute="top" secondItem="inY-09-kzP" secondAttribute="top" id="fbI-8K-Uty"/>
                 <constraint firstItem="vGo-bN-loR" firstAttribute="trailing" secondItem="AB8-YI-9T8" secondAttribute="trailing" id="k9K-fU-j6t"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="EPw-KN-Bzt"/>
             <point key="canvasLocation" x="79.5" y="53.5"/>
         </view>
     </objects>

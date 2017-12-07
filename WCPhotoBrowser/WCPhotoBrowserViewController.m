@@ -90,14 +90,13 @@
     [self setupPhotoPageControl];
     [self setupPhotoBrowser];
 }
+
 #pragma mark - life cycle
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (IS_IPHONE_X) {
-        self.navigationBarViewTopConstraint.constant = 44.0;
-    } else {
-        self.navigationBarViewTopConstraint.constant = 20.0;
+    if (!IS_IPHONE_X && !self.showStatusBar) {
+        self.navigationBarViewTopConstraint.constant = -20.0;
     }
 }
 
