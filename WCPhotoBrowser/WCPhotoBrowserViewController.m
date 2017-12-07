@@ -69,14 +69,15 @@
 }
 
 - (void)commonInit {
-    _currentDisplayImage = nil;
-    _currentDisplayImageIndex = 0;
     _showStatusBar = YES;
-    _firstDisplayPhotoIndex = 0;
+    _showNavigationBar = YES;
+    _currentDisplayImage = nil;
     _displayPhotoOrderInfo = NO;
     _displayPageControl = NO;
     _longPressGestureEnabled = NO;
     _singleTapGestureEnabled = YES;
+    _currentDisplayImageIndex = 0;
+    _firstDisplayPhotoIndex = 0;
 }
 
 - (void)viewDidLoad {
@@ -193,19 +194,17 @@
 }
 
 - (void)showNavigationBarView {
-    if (self.navigationBarView.hidden) {
-        __weak typeof(self)weakSelf = self;
+    if (self.showNavigationBar && self.navigationBarView.hidden) {
         [UIView animateWithDuration:0.25 animations:^{
-            weakSelf.navigationBarView.hidden = NO;
+            self.navigationBarView.hidden = NO;
         }];
     }
 }
 
 - (void)hideNavigationBarView {
     if (!self.navigationBarView.hidden) {
-        __weak typeof(self)weakSelf = self;
         [UIView animateWithDuration:0.25 animations:^{
-            weakSelf.navigationBarView.hidden = YES;
+            self.navigationBarView.hidden = YES;
         }];
     }
 }
@@ -229,11 +228,10 @@
 #pragma mark - TapGesture
 
 - (void)handleTapGesture:(UIGestureRecognizer *)gestureRecognizer {
-    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.25 animations:^{
-        weakSelf.navigationBarView.hidden = YES;
+        self.navigationBarView.hidden = YES;
     } completion:^(BOOL finished) {
-        [weakSelf dismissViewController];
+        [self dismissViewController];
     }];
 }
 
@@ -273,6 +271,15 @@
 }
 
 #pragma mark - getter and setter
+
+- (void)setShowNavigationBar:(BOOL)showNavigationBar {
+    _showNavigationBar = showNavigationBar;
+    if (_showNavigationBar) {
+        [self hideNavigationBarView];
+    } else {
+        [self showNavigationBarView];
+    }
+}
 
 - (void)setNetworkImages:(NSArray *)networkImages {
     _networkImages = networkImages;

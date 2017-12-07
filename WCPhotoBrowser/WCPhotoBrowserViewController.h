@@ -19,6 +19,11 @@ typedef void(^WCPhotoBrowserLongPressGestureTrigger)(WCPhotoBrowserViewControlle
 @property (nonatomic, assign) BOOL showStatusBar;
 
 /**
+ 是否显示顶部导航栏，默认为YES
+ */
+@property (nonatomic, assign) BOOL showNavigationBar;
+
+/**
  是否显示导航栏上的提示(例如：1/6)，默认隐藏。
  */
 @property (nonatomic, assign) BOOL displayPhotoOrderInfo;

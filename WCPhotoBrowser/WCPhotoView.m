@@ -128,23 +128,22 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
     if (self.photoScrollView.zoomScale != kDefaultZoomScaleForPhotoScrollView) return;
     CGFloat offsetY = self.photoScrollView.contentOffset.y;
     if (gesture.state == UIGestureRecognizerStateEnded) {
-        __weak typeof(self) weakSelf = self;
         if (ABS(offsetY) < kTresholdPanLengthForScrollView) {
             // 下拉距离小于阀值，photoBrowser会恢复原始状态
             self.photoBrowserView.photoBrowserWillAppear();
             [UIView animateWithDuration:0.25 animations:^{
-                weakSelf.photoScrollView.contentInset = UIEdgeInsetsZero;
+                self.photoScrollView.contentInset = UIEdgeInsetsZero;
             }];
         } else {
             // 下拉距离大于阀值，photoBrowser消失
             CGFloat photoScrollViewHeight = self.photoScrollView.bounds.size.height;
             [UIView animateWithDuration:0.25 animations:^{
-                CGRect photoImageFrame = weakSelf.photoImageView.frame;
+                CGRect photoImageFrame = self.photoImageView.frame;
                 photoImageFrame.origin.y = photoScrollViewHeight;
-                weakSelf.photoImageView.frame = photoImageFrame;
+                self.photoImageView.frame = photoImageFrame;
             } completion:^(BOOL finished) {
-                weakSelf.photoBrowserView.photoBrowserBackgroundColorAlphaDidChange(0.0, 0.0);
-                weakSelf.photoBrowserView.photoBrowserDidDisappear();
+                self.photoBrowserView.photoBrowserBackgroundColorAlphaDidChange(0.0, 0.0);
+                self.photoBrowserView.photoBrowserDidDisappear();
             }];
         }
     } else {
