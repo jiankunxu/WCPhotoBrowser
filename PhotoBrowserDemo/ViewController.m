@@ -28,7 +28,7 @@
 - (IBAction)buttonDidClicked:(id)sender {
     
     WCPhotoBrowserViewController *photoBrowser = [[WCPhotoBrowserViewController alloc] init];
-    photoBrowser.displayPageControl = NO;
+    photoBrowser.displayPageControl = YES;
     photoBrowser.displayPhotoOrderInfo = YES;
 //    photoBrowser.showStatusBar = NO;
     NSArray *images = @[
