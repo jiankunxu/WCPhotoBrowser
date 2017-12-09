@@ -83,6 +83,11 @@
 @property (nonatomic, weak) id<WCPhotoBrowserDelegate> delegate;
 
 /**
+ 当前展示图片的下标
+ */
+@property (nonatomic, assign) NSInteger displayPhotoIndex;
+
+/**
  是否允许单击dimiss
  */
 @property (nonatomic, assign) BOOL singleTapGestureEnabled;

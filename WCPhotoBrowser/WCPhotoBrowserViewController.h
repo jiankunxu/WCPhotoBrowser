@@ -9,9 +9,42 @@
 #import <UIKit/UIKit.h>
 @class WCPhotoBrowserViewController, WCPhotoModel;
 
+@protocol WCPhotoBrowserViewControllerDelegate <NSObject>
+
+@optional
+
+/**
+ 当前展示图片的索引改变会调用此方法
+
+ @param photoBrowser 图片浏览控制器
+ @param currentDisplayImageIndex 当前展示图片的索引
+ */
+- (void)photoBrowser:(WCPhotoBrowserViewController *)photoBrowser currentDisplayImageIndex:(NSInteger)currentDisplayImageIndex;
+
+/**
+ 当前展示图片的索引改变会调用此方法
+
+ @param photoBrowser 图片浏览控制器
+ @param currentDisplayImage 当前展示的图片
+ @param currentDisplayImageIndex 当前展示图片的索引
+ */
+- (void)photoBrowser:(WCPhotoBrowserViewController *)photoBrowser currentDisplayImage:(UIImage *)currentDisplayImage currentDisplayImageIndex:(NSInteger)currentDisplayImageIndex;
+
+/**
+ 当长按手势触发时，会调用此方法
+
+ @param photoBrowser 图片浏览控制器
+ @param currentDisplayImage 当前展示的图片
+ */
+- (void)photoBrowser:(WCPhotoBrowserViewController *)photoBrowser longPressGestureTriggerAtCurrentDisplayImage:(UIImage *)currentDisplayImage;
+
+@end
+
 typedef void(^WCPhotoBrowserLongPressGestureTrigger)(WCPhotoBrowserViewController *photoBrowserViewController, UIImage *currentDisplayImage, NSInteger currentDisplayImageIndex);
 
 @interface WCPhotoBrowserViewController : UIViewController
+
+@property (nonatomic, weak) id<WCPhotoBrowserViewControllerDelegate> delegate;
 
 /**
  设置statusBar的显示与隐藏，默认隐藏。
@@ -77,11 +110,6 @@ typedef void(^WCPhotoBrowserLongPressGestureTrigger)(WCPhotoBrowserViewControlle
  长按手势触发时回调block
  */
 @property (nonatomic, copy) WCPhotoBrowserLongPressGestureTrigger longPressGestureTriggerBlock;
-
-/**
- 当前展示的图片
- */
-@property (nonatomic, strong) UIImage *currentDisplayImage;
 
 /**
  要展示的图片

@@ -23,6 +23,7 @@
 @interface WCPhotoBrowserViewController () <WCPhotoBrowserDelegate> {
     UILongPressGestureRecognizer *_longPressGesture;
     WCMaskAnimatedTransition *_maskAnimatedTransition;
+    UIImage *_currentDisplayImage;
     NSInteger _currentDisplayImageIndex;
 }
 
@@ -90,6 +91,7 @@
     [self setupPhotoOrderLabel];
     [self setupPhotoPageControl];
     [self setupPhotoBrowser];
+    [self setupLongPressGesture];
 }
 
 #pragma mark - life cycle
@@ -212,16 +214,25 @@
 
 #pragma mark - Long Press Gesture
 
-- (void)handleLongPressGesture:(UIGestureRecognizer *)gestureRecognizer {
-    if (self.longPressGestureTriggerBlock) {
-        self.longPressGestureTriggerBlock(self, _currentDisplayImage, _currentDisplayImageIndex);
+- (void)setupLongPressGesture {
+    if (self.longPressGestureEnabled) {
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
+        [self.view addGestureRecognizer:longPressGesture];
+        _longPressGesture = longPressGesture;
     } else {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        if (self.alertActions.count > 0) {
-            for (UIAlertAction *alertAction in self.alertActions) {
-                [alertController addAction:alertAction];
-            }
-            [self presentViewController:alertController animated:YES completion:nil];
+        if (_longPressGesture) {
+            [self.view removeGestureRecognizer:_longPressGesture];
+        }
+    }
+}
+
+- (void)handleLongPressGesture:(UIGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        if (self.longPressGestureTriggerBlock) {
+            self.longPressGestureTriggerBlock(self, _currentDisplayImage, _currentDisplayImageIndex);
+        }
+        if ([self.delegate respondsToSelector:@selector(photoBrowser:longPressGestureTriggerAtCurrentDisplayImage:)]) {
+            [self.delegate photoBrowser:self longPressGestureTriggerAtCurrentDisplayImage:_currentDisplayImage];
         }
     }
 }
@@ -246,14 +257,25 @@
     return [self.images objectAtIndex:index];
 }
 
+- (void)photoBrowser:(WCPhotoBrowserView *)photoBrowser currentDisplayPhotoIndex:(NSInteger)index {
+    _currentDisplayImageIndex = index;
+    if ([self.delegate respondsToSelector:@selector(photoBrowser:currentDisplayImageIndex:)]) {
+        [self.delegate photoBrowser:self currentDisplayImageIndex:_currentDisplayImageIndex];
+    }
+    
+    if (self.displayPhotoOrderInfo) {
+        [self.photoOrderLabel setText:[NSString stringWithFormat:@"%td/%td", _currentDisplayImageIndex + 1, self.images.count]];
+    }
+    if (self.displayPageControl) {
+        self.photoPageControl.currentPage = _currentDisplayImageIndex;
+    }
+}
+
 - (void)photoBrowser:(WCPhotoBrowserView *)photoBrowser currentDisplayPhoto:(UIImage *)currentDisplayPhoto currentDisplayPhotoIndex:(NSInteger)currentDisplayPhotoIndex {
     _currentDisplayImage = currentDisplayPhoto;
     _currentDisplayImageIndex = currentDisplayPhotoIndex;
-    if (self.displayPhotoOrderInfo) {
-        [self.photoOrderLabel setText:[NSString stringWithFormat:@"%td/%td", currentDisplayPhotoIndex + 1, self.images.count]];
-    }
-    if (self.displayPageControl) {
-        self.photoPageControl.currentPage = currentDisplayPhotoIndex;
+    if ([self.delegate respondsToSelector:@selector(photoBrowser:currentDisplayImage:currentDisplayImageIndex:)]) {
+        [self.delegate photoBrowser:self currentDisplayImage:_currentDisplayImage currentDisplayImageIndex:_currentDisplayImageIndex];
     }
 }
 
@@ -320,30 +342,31 @@
 }
 
 // 长按手势
-- (void)setLongPressGestureEnabled:(BOOL)longPressGestureEnabled {
-    _longPressGestureEnabled = longPressGestureEnabled;
-    if (longPressGestureEnabled) {
-        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
-        [self.view addGestureRecognizer:longPressGesture];
-        _longPressGesture = longPressGesture;
-    } else {
-        if (_longPressGesture) {
-            [self.view removeGestureRecognizer:_longPressGesture];
-        }
-    }
-}
+//- (void)setLongPressGestureEnabled:(BOOL)longPressGestureEnabled {
+//    _longPressGestureEnabled = longPressGestureEnabled;
+//    if (longPressGestureEnabled) {
+//        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
+//        [self.view addGestureRecognizer:longPressGesture];
+//        _longPressGesture = longPressGesture;
+//    } else {
+//        if (_longPressGesture) {
+//            [self.view removeGestureRecognizer:_longPressGesture];
+//        }
+//    }
+//}
 
 - (void)setLongPressGestureTriggerBlock:(WCPhotoBrowserLongPressGestureTrigger)longPressGestureTriggerBlock {
     _longPressGestureTriggerBlock = longPressGestureTriggerBlock;
     if (_longPressGestureTriggerBlock) {
-        [self setLongPressGestureEnabled:YES];
+        _longPressGestureEnabled = YES;
     }
 }
 
 - (void)setAlertActions:(NSArray<UIAlertAction *> *)alertActions {
     _alertActions = alertActions;
     if (_alertActions.count > 0) {
-        [self setLongPressGestureEnabled:YES];
+        _longPressGestureEnabled = YES;
+        
     }
 }
 

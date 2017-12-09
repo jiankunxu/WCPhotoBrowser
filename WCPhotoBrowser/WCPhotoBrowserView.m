@@ -20,7 +20,6 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
 
 @property (nonatomic, strong) NSMutableArray<WCPhotoView *> *visiblePhotos;
 @property (nonatomic, strong) NSMutableSet<WCPhotoView *> *reuseablePhotos;
-@property (nonatomic, assign) NSInteger displayPhotoIndex;
 @property (nonatomic, assign) NSInteger totalPhotos;
 @property (nonatomic, assign) CGFloat scrollViewWidth;
 @property (nonatomic, assign) CGFloat scrollViewHeight;
@@ -52,16 +51,18 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
         UIImage *placeholderImage = [_delegate placeholderImageForPhotoBrowser:self];
         self.placeholderImage = placeholderImage;
     }
+    NSInteger displayPhotoIndex = 0;
     if ([_delegate respondsToSelector:@selector(firstDisplayPhotoIndexInPhotoBrowser:)]) {
-        NSInteger displayPhotoIndex = [_delegate firstDisplayPhotoIndexInPhotoBrowser:self];
-        self.displayPhotoIndex = [self safeIndexForPhotoBrowserWithIndex:displayPhotoIndex];
+        displayPhotoIndex = [_delegate firstDisplayPhotoIndexInPhotoBrowser:self];
+        displayPhotoIndex = [self safeIndexForPhotoBrowserWithIndex:displayPhotoIndex];
     }
     
     [self addSubview:self.scrollView];
     [self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    WCPhotoView *photoView = [self photoViewAtIndex:self.displayPhotoIndex];
+    WCPhotoView *photoView = [self photoViewAtIndex:displayPhotoIndex];
     [self.visiblePhotos addObject:photoView];
     [self redisplayPhotoBrowser];
+    self.displayPhotoIndex = displayPhotoIndex;
 }
 
 - (void)layoutSubviews {
@@ -195,14 +196,7 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
  @return 安全的index
  */
 - (NSInteger)safeIndexForPhotoBrowserWithIndex:(NSInteger)index {
-    NSInteger safeIndex = index;
-    if (index < 0) {
-        safeIndex = 0;
-    }
-    if (index >= self.totalPhotos) {
-        safeIndex = self.totalPhotos - 1;
-    }
-    return safeIndex;
+    return MIN(MAX(0, index), self.totalPhotos - 1);
 }
 
 /**
@@ -233,10 +227,10 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
 - (void)setDisplayPhotoIndex:(NSInteger)displayPhotoIndex {
     if (_displayPhotoIndex != displayPhotoIndex) {
         _displayPhotoIndex = displayPhotoIndex;
+        // 设置新的index时图片还未加载完，所以此时图片为空。
         if ([_delegate respondsToSelector:@selector(photoBrowser:currentDisplayPhoto:currentDisplayPhotoIndex:)]) {
             WCPhotoView *currentDisplayPhotoView = [self currentDisplayPhotoView];
-            UIImage *currentDisplayImage = currentDisplayPhotoView ? currentDisplayPhotoView.photoImageView.image : nil;
-            [_delegate photoBrowser:self currentDisplayPhoto:currentDisplayImage currentDisplayPhotoIndex:displayPhotoIndex];
+            [_delegate photoBrowser:self currentDisplayPhoto:currentDisplayPhotoView.photoImageView.image currentDisplayPhotoIndex:displayPhotoIndex];
         }
         if ([_delegate respondsToSelector:@selector(photoBrowser:currentDisplayPhotoIndex:)]) {
             [_delegate photoBrowser:self currentDisplayPhotoIndex:displayPhotoIndex];

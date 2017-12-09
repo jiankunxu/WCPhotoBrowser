@@ -84,9 +84,12 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
     if (photoModel.imageURL.length > 0) {
         __weak typeof(self) weakSelf = self;
         [self.activityIndicatorView startAnimating];
-        self.activityIndicatorView.hidden = NO;
         [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:photoModel.imageURL] placeholderImage:self.placeholderImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             [weakSelf.activityIndicatorView stopAnimating];
+            // 当图片加载完回调，否则currentDisplayImage为空
+            if (weakSelf.photoBrowserView.displayPhotoIndex == weakSelf.photoIndex && [weakSelf.photoBrowserView.delegate respondsToSelector:@selector(photoBrowser:currentDisplayPhoto:currentDisplayPhotoIndex:)]) {
+                [weakSelf.photoBrowserView.delegate photoBrowser:weakSelf.photoBrowserView currentDisplayPhoto:image currentDisplayPhotoIndex:weakSelf.photoIndex];
+            }
         }];
     } else if (photoModel.localImage) {
         [self.photoImageView setImage:photoModel.localImage];

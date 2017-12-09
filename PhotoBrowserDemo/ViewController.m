@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "WCPhotoBrowser.h"
 
-@interface ViewController ()
+@interface ViewController () <WCPhotoBrowserViewControllerDelegate>
 
 @property (nonatomic, strong) NSArray *networkImages;
 @property (nonatomic, strong) NSArray *localImages;
@@ -29,20 +29,81 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - PhotoBrowser View Controller Delegate
+
+- (void)photoBrowser:(WCPhotoBrowserViewController *)photoBrowser currentDisplayImageIndex:(NSInteger)currentDisplayImageIndex {
+    NSLog(@"currentDisplayImageIndex: =========> %td", currentDisplayImageIndex);
+}
+
+- (void)photoBrowser:(WCPhotoBrowserViewController *)photoBrowser currentDisplayImage:(UIImage *)currentDisplayImage currentDisplayImageIndex:(NSInteger)currentDisplayImageIndex {
+    NSLog(@"currentDisplayImageIndex: ------> %td", currentDisplayImageIndex);
+}
+
+- (void)photoBrowser:(WCPhotoBrowserViewController *)photoBrowser longPressGestureTriggerAtCurrentDisplayImage:(UIImage *)currentDisplayImage {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *shareAction = [UIAlertAction actionWithTitle:@"发送给朋友" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"发送给朋友...");
+    }];
+    UIAlertAction *saveImageAction = [UIAlertAction actionWithTitle:@"保存图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"保存图片...");
+    }];
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"取消...");
+    }];
+    [alertController addAction:shareAction];
+    [alertController addAction:saveImageAction];
+    [alertController addAction:cancleAction];
+    if (photoBrowser.presentedViewController == nil) {
+        [photoBrowser presentViewController:alertController animated:YES completion:nil];
+    } else {
+        [photoBrowser dismissViewControllerAnimated:NO completion:^{
+            [photoBrowser presentViewController:alertController animated:YES completion:nil];
+        }];
+    }
+}
+
 - (IBAction)buttonDidClicked:(UIButton *)sender {
     WCPhotoBrowserViewController *photoBrowser = [[WCPhotoBrowserViewController alloc] init];
+    photoBrowser.longPressGestureEnabled = YES;
     if (sender.tag == 1001) {
-        photoBrowser.displayPageControl = YES;
         photoBrowser.pageIndicatorTintColor = [UIColor lightGrayColor];
         photoBrowser.currentPageIndicatorTintColor = [UIColor redColor];
+        photoBrowser.displayPageControl = YES;
         photoBrowser.showNavigationBar = NO;
-        photoBrowser.firstDisplayPhotoIndex = 3;
         photoBrowser.networkImages = self.networkImages;
+        photoBrowser.firstDisplayPhotoIndex = 4;
+        
+        photoBrowser.longPressGestureTriggerBlock = ^(WCPhotoBrowserViewController *photoBrowserViewController, UIImage *currentDisplayImage, NSInteger currentDisplayImageIndex) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+            UIAlertAction *shareAction = [UIAlertAction actionWithTitle:@"发送给朋友" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSLog(@"发送给朋友...");
+            }];
+            UIAlertAction *saveImageAction = [UIAlertAction actionWithTitle:@"保存图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSLog(@"保存图片...");
+                if (currentDisplayImage) {
+                    UIImageWriteToSavedPhotosAlbum(currentDisplayImage, nil, nil, nil);
+                }
+            }];
+            UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                NSLog(@"取消...");
+            }];
+            [alertController addAction:shareAction];
+            [alertController addAction:saveImageAction];
+            [alertController addAction:cancleAction];
+            if (photoBrowserViewController.presentedViewController == nil) {
+                [photoBrowserViewController presentViewController:alertController animated:YES completion:nil];
+            } else {
+                [photoBrowserViewController.presentedViewController dismissViewControllerAnimated:NO completion:^{
+                    [photoBrowserViewController presentViewController:alertController animated:YES completion:nil];
+                }];
+            }
+        };
     } else {
         photoBrowser.displayPageControl = NO;
         photoBrowser.displayPhotoOrderInfo = YES;
         photoBrowser.firstDisplayPhotoIndex = 2;
         photoBrowser.localImages = self.localImages;
+        photoBrowser.delegate = self;
     }
     [photoBrowser show];
 }
