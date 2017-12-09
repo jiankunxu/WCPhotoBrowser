@@ -97,6 +97,7 @@ photoBrowser.longPressGestureTriggerBlock = ^(WCPhotoBrowserViewController *phot
 };
 
 /**************************** 或者 ****************************/
+
 // 启用长按手势，默认为NO
 photoBrowser.longPressGestureEnabled = YES;
 // 设置photoBrowser的delegate
@@ -147,16 +148,12 @@ photoBrowser.delegate = self;
 
 # Change Log
 
-
-
-
+- 敬请期待V0.0.1
 
 # Contact
 
-
-
-
+- [MeetDay](https://github.com/MeetDay)
 
 # LICENSE
 
-详情见 [LICENSE](https://github.com/MeetDay/WCPhotoBrowser/blob/master/LICENSE) 文件。
+- 详情见 [LICENSE](https://github.com/MeetDay/WCPhotoBrowser/blob/master/LICENSE) 文件。
