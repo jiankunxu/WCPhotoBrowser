@@ -2,11 +2,13 @@
 
 [![Build](https://img.shields.io/badge/build-passing-green.svg)]() [![MIT](https://img.shields.io/badge/License-MIT-blue.svg)]() [![iOS](https://img.shields.io/badge/platform-iOS-lightgrey.svg)]() [![Support](https://img.shields.io/badge/support-iOS%208%2B-blue.svg)]() [![Github](https://img.shields.io/badge/github-MeetDay-yellowgreen.svg)]()
 
-
-
 简易好用的图片浏览器
 
+### 演示：
 
+![iPhone8_index_h](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhone8_index_v.gif)
+
+![iPhone8_index_v](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhone8_index_v.gif)
 
 # Installation
 
