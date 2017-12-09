@@ -6,4 +6,8 @@
 
 
 
-详情见[https://github.com/MeetDay/WCPhotoBrowser/blob/master/LICENSE](LICENSE)文件。
+详情见
+
+[LICENSE​]: https://github.com/MeetDay/WCPhotoBrowser/blob/master/LICENSE
+
+文件。
