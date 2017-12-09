@@ -258,7 +258,7 @@
 }
 
 - (NSInteger)firstDisplayPhotoIndexInPhotoBrowser:(WCPhotoBrowserView *)photoBrowser {
-    return self.firstDisplayPhotoIndex;
+    return MIN(MAX(0, self.firstDisplayPhotoIndex - 1), self.images.count - 1);
 }
 
 - (UIImage *)placeholderImageForPhotoBrowser:(WCPhotoBrowserView *)photoBrowser {
