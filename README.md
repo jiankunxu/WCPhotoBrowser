@@ -6,7 +6,9 @@
 
 ### 演示：
 
-![iPhone8_index_h](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhone8_index_v.gif)![iPhone8_index_v](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhone8_index_h.gif)
+![iPhone8_index_h](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhone8_index_v.gif)![iPhone8_pagecontrol_h](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhone8_pagecontrol_v.gif)
+
+![iPhone8_pagecontrol_v](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhone8_pagecontrol_h.gif)![iPhone8_index_v](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhone8_index_h.gif)
 
 # Installation
 
