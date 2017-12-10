@@ -227,7 +227,7 @@ static const CGFloat kWCPhotoBrowserDefaultPhotoSpacing = 20.0f;
 - (void)setDisplayPhotoIndex:(NSInteger)displayPhotoIndex {
     if (_displayPhotoIndex != displayPhotoIndex) {
         _displayPhotoIndex = displayPhotoIndex;
-        // 设置新的index时图片还未加载完，所以此时图片为空。
+        // 设置新的index时图片还未加载完，所以此时图片为空。所以在WCPhotoView的图片加载完成后会再次调用此方法。
         if ([_delegate respondsToSelector:@selector(photoBrowser:currentDisplayPhoto:currentDisplayPhotoIndex:)]) {
             WCPhotoView *currentDisplayPhotoView = [self currentDisplayPhotoView];
             [_delegate photoBrowser:self currentDisplayPhoto:currentDisplayPhotoView.photoImageView.image currentDisplayPhotoIndex:displayPhotoIndex];

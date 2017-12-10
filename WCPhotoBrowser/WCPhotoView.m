@@ -149,7 +149,7 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
                 self.photoBrowserView.photoBrowserDidDisappear();
             }];
         }
-    } else {
+    } else if (gesture.state == UIGestureRecognizerStateChanged) {
         // 设置下拉距离为scrollView的Inset.top，同时预示着photoBrowser将会消失
         self.photoBrowserView.photoBrowserWillDisappear();
         self.photoScrollView.contentInset = UIEdgeInsetsMake(-offsetY, 0, 0, 0);
@@ -160,10 +160,12 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // 下拉距离小于某一阀值时，调整Photobrowser背景颜色的alpha值
-    if (self.photoScrollView.zoomScale == kDefaultZoomScaleForPhotoScrollView && ABS(scrollView.contentOffset.y) < kTresholdPanLengthForScrollView) {
-        CGFloat alphaOffset = 50.0;
-        CGFloat alpha = 1 - ABS(scrollView.contentOffset.y / (kTresholdPanLengthForScrollView + alphaOffset));
-        self.photoBrowserView.photoBrowserBackgroundColorAlphaDidChange(alpha, 1.0);
+    if (self.photoScrollView.zoomScale == kDefaultZoomScaleForPhotoScrollView) {
+        if (ABS(scrollView.contentOffset.y) < kTresholdPanLengthForScrollView) {
+            CGFloat alphaOffset = 50.0;
+            CGFloat alpha = 1 - ABS(scrollView.contentOffset.y / (kTresholdPanLengthForScrollView + alphaOffset));
+            self.photoBrowserView.photoBrowserBackgroundColorAlphaDidChange(alpha, 1.0);
+        }
     }
 }
 
@@ -179,6 +181,9 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
+    // 图片快速扩大时可能会触发ScrollView的PanGesture，让NavigationBarView(1/6)消失。缩放结束后，让NavigationBarView复原。
+    self.photoBrowserView.photoBrowserWillAppear();
+    
     _currentZoomScale = scale;
     if (scale == kDefaultZoomScaleForPhotoScrollView) {
         [self resetPhotoScrollViewState];
