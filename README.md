@@ -2,7 +2,7 @@
 
 [![Build](https://img.shields.io/badge/build-passing-green.svg)]() [![MIT](https://img.shields.io/badge/License-MIT-blue.svg)]() [![iOS](https://img.shields.io/badge/platform-iOS-lightgrey.svg)]() [![Support](https://img.shields.io/badge/support-iOS%208%2B-blue.svg)]() [![Github](https://img.shields.io/badge/github-MeetDay-yellowgreen.svg)]()
 
-简易好用的图片浏览器
+简易好用的图片浏览器，可支持查看本地图片或者网络图片(多图)，支持类似微信的图片查看效果，适配了横竖屏(包括iPhone X)。
 
 ### 演示：
 
@@ -130,6 +130,8 @@ photoBrowser.transitioningDelegate = self.animator;
 
 @end
 ```
+
+如若有疑问，可下载WCPhotoBrowserDemo查阅具体的代码。
 
 - #### 支持单击屏幕隐藏图片浏览器
 
