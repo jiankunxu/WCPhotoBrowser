@@ -34,8 +34,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLv-xh-Rrj">
-                                <rect key="frame" x="165.5" y="239" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="57" y="239" width="263" height="30"/>
+                                <state key="normal" title="WCPhotoBrowser 类似微信的图片查看"/>
                                 <connections>
                                     <segue destination="PuI-GU-Vgy" kind="show" id="fQe-AN-Ywy"/>
                                 </connections>
@@ -77,8 +77,10 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Des-b3-056">
                                             <rect key="frame" x="15" y="15" width="345" height="362.5"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如果具有12星座典型性格的12个人，凑在一起开会，会是什么样的呢？（这是我精分最多的一期视频了，好累！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhD-oc-I3k">
-                                                    <rect key="frame" x="8" y="0.0" width="327" height="10"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhD-oc-I3k">
+                                                    <rect key="frame" x="8" y="0.0" width="337" height="10"/>
+                                                    <string key="text">人生是一场旅程。我们经历了几次轮回，才换来这个旅程。而这个旅程很短，因此不妨大胆一些，不妨大胆一些去爱一个人，去攀一座山，去追一个梦……有很多事我都不明白。但我相信一件事。上天让我们来到这个世上，就是为了让我们创造奇迹。
+</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

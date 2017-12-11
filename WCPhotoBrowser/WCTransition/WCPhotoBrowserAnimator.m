@@ -36,6 +36,7 @@
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     if (toVC.isBeingPresented) {
         toView.alpha = 0.0;
+        toView.frame = containerView.bounds;
         [containerView addSubview:toView];
         
         NSInteger currentDisplayImageIndex = [self.animatorDismissDelegate currentDisplayImageIndexInPhotoBrowser];

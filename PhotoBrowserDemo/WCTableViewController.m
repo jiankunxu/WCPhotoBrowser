@@ -9,6 +9,9 @@
 #import "WCTableViewController.h"
 #import "WCPhotoBrowser.h"
 
+#define SCREENWIDTH ([UIScreen mainScreen].bounds.size.width)
+#define SCREENHEIGHT ([UIScreen mainScreen].bounds.size.height)
+
 @interface WCTableViewController ()
 
 @property (nonatomic, strong) NSArray *localImages;
@@ -111,14 +114,12 @@
 
 - (CGRect)willDisplayImageOfEndRectAtIndex:(NSInteger)willDisplayImageIndex {
     UIImage *image = [self.images objectAtIndex:willDisplayImageIndex];
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat height = (screenWidth / image.size.width) * image.size.height;
+    CGFloat height = (SCREENWIDTH / image.size.width) * image.size.height;
     CGFloat y = 0;
-    if (height < screenHeight) {
-        y = (screenHeight - height) / 2.0;
+    if (height < SCREENHEIGHT) {
+        y = (SCREENHEIGHT - height) / 2.0;
     }
-    return CGRectMake(0, y, screenWidth, height);
+    return CGRectMake(0, y, SCREENWIDTH, height);
 }
 
 - (IBAction)buttonDidClicked:(UIButton *)sender {
