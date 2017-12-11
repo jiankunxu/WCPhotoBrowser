@@ -21,7 +21,7 @@
 - (UIImage *)willDisplayImageInPhotoBrowserAtIndex:(NSInteger)willDisplayImageIndex;
 
 /**
- 返回将要展示图片相对屏幕的开始位置
+ 根据图片下标返回将要展示图片相对屏幕的开始位置
 
  @param willDisplayImageIndex 将要展示图片的下标
  @return 将要展示图片的开始位置
@@ -29,7 +29,7 @@
 - (CGRect)willDisplayImageOfStartRectAtIndex:(NSInteger)willDisplayImageIndex;
 
 /**
- 返回将要展示图片相对屏幕的结束位置
+ 根据图片下标返回将要展示图片相对屏幕的结束位置
 
  @param willDisplayImageIndex 将要展示图片的下标
  @return 将要展示图片动画结束后的位置
