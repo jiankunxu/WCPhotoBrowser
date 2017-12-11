@@ -16,6 +16,8 @@
 		7F0DF4771FCE9BDB00A9C9C9 /* WCPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F0DF4761FCE9BDB00A9C9C9 /* WCPhotoModel.m */; };
 		7F67D97E1FD2FED100D71873 /* WCMaskAnimatedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F67D97D1FD2FED100D71873 /* WCMaskAnimatedTransition.m */; };
 		7F67D9811FD43C9E00D71873 /* UIViewController+TopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F67D9801FD43C9E00D71873 /* UIViewController+TopViewController.m */; };
+		7F6EEA221FDE240200B76DEA /* WCPhotoBrowserAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EEA211FDE240200B76DEA /* WCPhotoBrowserAnimator.m */; };
+		7F6EEA251FDE348C00B76DEA /* WCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F6EEA241FDE348C00B76DEA /* WCTableViewController.m */; };
 		7FA478811FCCF728009B638F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA478801FCCF728009B638F /* AppDelegate.m */; };
 		7FA478841FCCF728009B638F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA478831FCCF728009B638F /* ViewController.m */; };
 		7FA478871FCCF728009B638F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA478851FCCF728009B638F /* Main.storyboard */; };
@@ -42,6 +44,10 @@
 		7F67D97D1FD2FED100D71873 /* WCMaskAnimatedTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCMaskAnimatedTransition.m; sourceTree = "<group>"; };
 		7F67D97F1FD43C9E00D71873 /* UIViewController+TopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TopViewController.h"; sourceTree = "<group>"; };
 		7F67D9801FD43C9E00D71873 /* UIViewController+TopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TopViewController.m"; sourceTree = "<group>"; };
+		7F6EEA201FDE240200B76DEA /* WCPhotoBrowserAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCPhotoBrowserAnimator.h; sourceTree = "<group>"; };
+		7F6EEA211FDE240200B76DEA /* WCPhotoBrowserAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCPhotoBrowserAnimator.m; sourceTree = "<group>"; };
+		7F6EEA231FDE348C00B76DEA /* WCTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCTableViewController.h; sourceTree = "<group>"; };
+		7F6EEA241FDE348C00B76DEA /* WCTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCTableViewController.m; sourceTree = "<group>"; };
 		7FA4787C1FCCF728009B638F /* PhotoBrowserDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoBrowserDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FA4787F1FCCF728009B638F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7FA478801FCCF728009B638F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -86,6 +92,8 @@
 			children = (
 				7F67D97C1FD2FED100D71873 /* WCMaskAnimatedTransition.h */,
 				7F67D97D1FD2FED100D71873 /* WCMaskAnimatedTransition.m */,
+				7F6EEA201FDE240200B76DEA /* WCPhotoBrowserAnimator.h */,
+				7F6EEA211FDE240200B76DEA /* WCPhotoBrowserAnimator.m */,
 			);
 			path = WCTransition;
 			sourceTree = "<group>";
@@ -127,6 +135,8 @@
 				7FA478801FCCF728009B638F /* AppDelegate.m */,
 				7FA478821FCCF728009B638F /* ViewController.h */,
 				7FA478831FCCF728009B638F /* ViewController.m */,
+				7F6EEA231FDE348C00B76DEA /* WCTableViewController.h */,
+				7F6EEA241FDE348C00B76DEA /* WCTableViewController.m */,
 				7FA478851FCCF728009B638F /* Main.storyboard */,
 				7FA478881FCCF728009B638F /* Assets.xcassets */,
 				7FA4788D1FCCF728009B638F /* Info.plist */,
@@ -309,8 +319,10 @@
 				7FA4788F1FCCF728009B638F /* main.m in Sources */,
 				7F67D97E1FD2FED100D71873 /* WCMaskAnimatedTransition.m in Sources */,
 				7F0DF4771FCE9BDB00A9C9C9 /* WCPhotoModel.m in Sources */,
+				7F6EEA221FDE240200B76DEA /* WCPhotoBrowserAnimator.m in Sources */,
 				7FA478811FCCF728009B638F /* AppDelegate.m in Sources */,
 				7F67D9811FD43C9E00D71873 /* UIViewController+TopViewController.m in Sources */,
+				7F6EEA251FDE348C00B76DEA /* WCTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

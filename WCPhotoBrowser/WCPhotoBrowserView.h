@@ -107,7 +107,7 @@
 /**
  图片浏览器已经消失（下拉距离到了临界值，图片浏览器消失）
  */
-@property (nonatomic, copy) void(^photoBrowserDidDisappear)(void);
+@property (nonatomic, copy) void(^photoBrowserDidDisappear)(BOOL photoBrowserDismissedFromUpToDown);
 
 /**
  当背景颜色的alpha值改变时调用
@@ -115,5 +115,7 @@
 @property (nonatomic, copy) void(^photoBrowserBackgroundColorAlphaDidChange)(CGFloat photoBrowserBackgroundColorAlpha, CGFloat photoBrowserViewAlpha);
 
 // -------------------------- end --------------------------
+
+- (WCPhotoView *)currentDisplayPhotoView;
 
 @end

@@ -33,13 +33,22 @@
                                     <action selector="buttonDidClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8C9-nm-Jcw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLv-xh-Rrj">
+                                <rect key="frame" x="165.5" y="239" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="PuI-GU-Vgy" kind="show" id="fQe-AN-Ywy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="bLv-xh-Rrj" firstAttribute="centerX" secondItem="kZf-Vb-s7e" secondAttribute="centerX" id="3ip-7y-WfG"/>
                             <constraint firstItem="8TG-GT-pnM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="44" id="AlM-Fa-B7f"/>
                             <constraint firstItem="kZf-Vb-s7e" firstAttribute="top" secondItem="8TG-GT-pnM" secondAttribute="bottom" constant="44" id="KYs-QI-uqZ"/>
                             <constraint firstItem="kZf-Vb-s7e" firstAttribute="centerX" secondItem="8TG-GT-pnM" secondAttribute="centerX" id="P0w-5u-QOG"/>
                             <constraint firstItem="8TG-GT-pnM" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="dfg-i9-clp"/>
+                            <constraint firstItem="bLv-xh-Rrj" firstAttribute="top" secondItem="kZf-Vb-s7e" secondAttribute="bottom" constant="27" id="mYQ-u7-nhc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -52,13 +61,13 @@
         <!--Table View Controller-->
         <scene sceneID="CjA-YW-VlS">
             <objects>
-                <tableViewController id="PuI-GU-Vgy" sceneMemberID="viewController">
+                <tableViewController id="PuI-GU-Vgy" customClass="WCTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cgZ-CY-yPP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="378" id="YcE-sp-XEq" customClass="cell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="378" id="YcE-sp-XEq" customClass="WCTableViewCell">
                                 <rect key="frame" x="0.0" y="28" width="375" height="378"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YcE-sp-XEq" id="tOb-ki-iAc">
@@ -77,58 +86,62 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzw-ho-5SS">
                                                     <rect key="frame" x="0.0" y="18" width="345" height="344.5"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="Wps-CL-LCr">
+                                                        <imageView clipsSubviews="YES" tag="1000" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image0" translatesAutoresizingMaskIntoConstraints="NO" id="FLi-I1-lx7" customClass="image0">
+                                                            <rect key="frame" x="0.0" y="0.0" width="111.5" height="111.5"/>
+                                                            <gestureRecognizers/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="FLi-I1-lx7" secondAttribute="height" multiplier="1:1" id="NMw-DD-vdD"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <imageView clipsSubviews="YES" tag="1001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image1" translatesAutoresizingMaskIntoConstraints="NO" id="Wps-CL-LCr">
                                                             <rect key="frame" x="116.5" y="0.0" width="112" height="111.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Wps-CL-LCr" secondAttribute="height" multiplier="1:1" id="SKo-wI-ILK"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="EAJ-D6-oGj">
+                                                        <imageView clipsSubviews="YES" tag="1002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image2" translatesAutoresizingMaskIntoConstraints="NO" id="EAJ-D6-oGj">
                                                             <rect key="frame" x="233.5" y="0.0" width="111.5" height="111.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="EAJ-D6-oGj" secondAttribute="height" multiplier="1:1" id="glr-BH-9rB"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="FcH-Lj-3A6">
+                                                        <imageView clipsSubviews="YES" tag="1003" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image3" translatesAutoresizingMaskIntoConstraints="NO" id="FcH-Lj-3A6">
                                                             <rect key="frame" x="0.0" y="116.5" width="111.5" height="111.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="FcH-Lj-3A6" secondAttribute="height" multiplier="1:1" id="vQD-nc-66l"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="bDc-uC-xqZ">
-                                                            <rect key="frame" x="116.5" y="116.5" width="112" height="112.5"/>
+                                                        <imageView clipsSubviews="YES" tag="1004" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image4" translatesAutoresizingMaskIntoConstraints="NO" id="bDc-uC-xqZ">
+                                                            <rect key="frame" x="116.5" y="116.5" width="112" height="112"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="bDc-uC-xqZ" secondAttribute="height" multiplier="1:1" id="ng3-0g-8qw"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outletCollection property="gestureRecognizers" destination="7hC-Cf-vhS" appends="YES" id="PYf-w6-PR8"/>
+                                                            </connections>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="gxs-vx-Wdv">
-                                                            <rect key="frame" x="233.5" y="116.5" width="111.5" height="111.5"/>
+                                                        <imageView clipsSubviews="YES" tag="1005" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image5" translatesAutoresizingMaskIntoConstraints="NO" id="gxs-vx-Wdv">
+                                                            <rect key="frame" x="233.5" y="116.5" width="111.5" height="112"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="gxs-vx-Wdv" secondAttribute="height" multiplier="1:1" id="7Cq-lY-4ix"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="7sa-Og-wOV">
+                                                        <imageView clipsSubviews="YES" tag="1006" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image6" translatesAutoresizingMaskIntoConstraints="NO" id="7sa-Og-wOV">
                                                             <rect key="frame" x="0.0" y="233" width="111.5" height="111.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="7sa-Og-wOV" secondAttribute="height" multiplier="1:1" id="TTF-Ln-4hh"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="EiJ-ov-Osj">
+                                                        <imageView clipsSubviews="YES" tag="1007" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image7" translatesAutoresizingMaskIntoConstraints="NO" id="EiJ-ov-Osj">
                                                             <rect key="frame" x="116.5" y="233" width="112" height="111.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="EiJ-ov-Osj" secondAttribute="height" multiplier="1:1" id="PeE-RS-B9O"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="VYy-SS-qji">
+                                                        <imageView clipsSubviews="YES" tag="1008" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image8" translatesAutoresizingMaskIntoConstraints="NO" id="VYy-SS-qji">
                                                             <rect key="frame" x="233.5" y="233" width="111.5" height="111.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="VYy-SS-qji" secondAttribute="height" multiplier="1:1" id="ySC-FA-DzY"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="FLi-I1-lx7">
-                                                            <rect key="frame" x="0.0" y="0.0" width="111.5" height="111.5"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="FLi-I1-lx7" secondAttribute="height" multiplier="1:1" id="NMw-DD-vdD"/>
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
@@ -186,6 +199,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="image1" destination="Wps-CL-LCr" id="ZG6-pz-zgm"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -193,13 +209,11 @@
                             <outlet property="delegate" destination="PuI-GU-Vgy" id="Hhk-2k-P59"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <outlet property="tableView" destination="cgZ-CY-yPP" id="lXM-zm-2g8"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VuE-h1-hGy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="7hC-Cf-vhS"/>
             </objects>
-            <point key="canvasLocation" x="140" y="928.78560719640188"/>
+            <point key="canvasLocation" x="1926" y="530"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PKd-GM-xEf">
@@ -224,10 +238,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1" width="1917" height="1276"/>
-        <image name="2" width="1784" height="1194"/>
-        <image name="3" width="1829" height="1337"/>
-        <image name="4" width="1914" height="1278"/>
-        <image name="5" width="1024" height="652"/>
+        <image name="image0" width="960" height="540"/>
+        <image name="image1" width="1917" height="1276"/>
+        <image name="image2" width="1784" height="1194"/>
+        <image name="image3" width="1829" height="1337"/>
+        <image name="image4" width="1914" height="1278"/>
+        <image name="image5" width="1024" height="652"/>
+        <image name="image6" width="1024" height="682"/>
+        <image name="image7" width="1024" height="680"/>
+        <image name="image8" width="1024" height="714"/>
     </resources>
 </document>

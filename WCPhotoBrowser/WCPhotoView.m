@@ -112,7 +112,7 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
 }
 
 - (void)handleSingleTapGesture:(UIGestureRecognizer *)gesture {
-    self.photoBrowserView.photoBrowserDidDisappear();
+    self.photoBrowserView.photoBrowserDidDisappear(NO);
 }
 
 - (void)doubleTapGesture:(UIGestureRecognizer *)gesture {
@@ -146,7 +146,7 @@ static const CGFloat kTresholdPanLengthForScrollView = 200.0f;
                 self.photoImageView.frame = photoImageFrame;
             } completion:^(BOOL finished) {
                 self.photoBrowserView.photoBrowserBackgroundColorAlphaDidChange(0.0, 0.0);
-                self.photoBrowserView.photoBrowserDidDisappear();
+                self.photoBrowserView.photoBrowserDidDisappear(YES);
             }];
         }
     } else if (gesture.state == UIGestureRecognizerStateChanged) {

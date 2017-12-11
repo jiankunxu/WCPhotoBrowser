@@ -10,6 +10,7 @@
 #define WCPhotoBrowser_h
 
 #import "WCPhotoModel.h"
+#import "WCPhotoBrowserAnimator.h"
 #import "WCPhotoBrowserViewController.h"
 
 #endif /* WCPhotoBrowser_h */

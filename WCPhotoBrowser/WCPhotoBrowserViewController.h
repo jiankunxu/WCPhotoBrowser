@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WCPhotoBrowserAnimator.h"
 @class WCPhotoBrowserViewController, WCPhotoModel;
 
 @protocol WCPhotoBrowserViewControllerDelegate <NSObject>
@@ -40,9 +41,11 @@
 
 @end
 
+
+
 typedef void(^WCPhotoBrowserLongPressGestureTrigger)(WCPhotoBrowserViewController *photoBrowserViewController, UIImage *currentDisplayImage, NSInteger currentDisplayImageIndex);
 
-@interface WCPhotoBrowserViewController : UIViewController
+@interface WCPhotoBrowserViewController : UIViewController <WCPhotoBrowserAnimatorDismissDelegate>
 
 @property (nonatomic, weak) id<WCPhotoBrowserViewControllerDelegate> delegate;
 

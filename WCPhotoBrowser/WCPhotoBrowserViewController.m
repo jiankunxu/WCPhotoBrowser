@@ -9,6 +9,7 @@
 #import "WCPhotoBrowserViewController.h"
 #import "WCPhotoBrowserView.h"
 #import "WCPhotoModel.h"
+#import "WCPhotoView.h"
 #import "UIImage+Bundle.h"
 #import "UIViewController+TopViewController.h"
 #import "WCMaskAnimatedTransition.h"
@@ -26,7 +27,7 @@
     UIImage *_currentDisplayImage;
     NSInteger _currentDisplayImageIndex;
 }
-
+@property (nonatomic, assign) BOOL photoBrowserDismissedFromUpToDown;
 @property (weak, nonatomic) IBOutlet WCPhotoBrowserView *photoBrowserView;
 @property (weak, nonatomic) IBOutlet UIView *navigationBarView;
 @property (weak, nonatomic) IBOutlet UIButton *cancleButton;
@@ -80,6 +81,7 @@
     _singleTapGestureEnabled = YES;
     _currentDisplayImageIndex = 0;
     _firstDisplayPhotoIndex = 0;
+    _photoBrowserDismissedFromUpToDown = NO;
     _statusBarStyle = UIStatusBarStyleDefault;
 }
 
@@ -127,10 +129,16 @@
 }
 
 - (void)show {
-    if (!self.transitioningDelegate) {
+    if (self.transitioningDelegate) {
+        if ([self.transitioningDelegate isKindOfClass:[WCPhotoBrowserAnimator class]]) {
+            WCPhotoBrowserAnimator *animator = (WCPhotoBrowserAnimator *)self.transitioningDelegate;
+            animator.animatorDismissDelegate = self;
+        }
+    } else {
         _maskAnimatedTransition = [[WCMaskAnimatedTransition alloc] init];
         self.transitioningDelegate = _maskAnimatedTransition;
     }
+    
     /**
      In iOS7, there's actually a new property for UIViewController called modalPresentationCapturesStatusBarAppearance
      When you present a view controller by calling the presentViewController:animated:completion: method, status bar appearance control is transferred from the presenting to the presented view controller only if the presented controller’s modalPresentationStyle value is UIModalPresentationFullScreen. By setting this property to YES, you specify the presented view controller controls status bar appearance, even though presented non–fullscreen.
@@ -158,7 +166,8 @@
     self.photoBrowserView.photoBrowserWillDisappear = ^{
         [weakSelf hideNavigationBarView];
     };
-    self.photoBrowserView.photoBrowserDidDisappear = ^{
+    self.photoBrowserView.photoBrowserDidDisappear = ^(BOOL photoBrowserDismissedFromUpToDown) {
+        weakSelf.photoBrowserDismissedFromUpToDown = photoBrowserDismissedFromUpToDown;
         [weakSelf dismissViewController];
     };
     self.photoBrowserView.photoBrowserBackgroundColorAlphaDidChange = ^(CGFloat photoBrowserBackgroundColorAlpha, CGFloat photoBrowserViewAlpha) {
@@ -287,6 +296,20 @@
     return self.placehoderImage;
 }
 
+#pragma mark - photo browser dimiss animator delegate
+
+- (UIImage *)currentDisplayImageInPhotoBrowser {
+    return _currentDisplayImage;
+}
+
+- (NSInteger)currentDisplayImageIndexInPhotoBrowser {
+    return _currentDisplayImageIndex;
+}
+
+- (BOOL)photoBrowserDismissedFromUpToDown {
+    return _photoBrowserDismissedFromUpToDown;
+}
+
 #pragma mark IBAction
 
 - (IBAction)cancleButtonDidClicked:(id)sender {
@@ -341,20 +364,6 @@
     [self setupPhotoPageControl];
 }
 
-// 长按手势
-//- (void)setLongPressGestureEnabled:(BOOL)longPressGestureEnabled {
-//    _longPressGestureEnabled = longPressGestureEnabled;
-//    if (longPressGestureEnabled) {
-//        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
-//        [self.view addGestureRecognizer:longPressGesture];
-//        _longPressGesture = longPressGesture;
-//    } else {
-//        if (_longPressGesture) {
-//            [self.view removeGestureRecognizer:_longPressGesture];
-//        }
-//    }
-//}
-
 - (void)setLongPressGestureTriggerBlock:(WCPhotoBrowserLongPressGestureTrigger)longPressGestureTriggerBlock {
     _longPressGestureTriggerBlock = longPressGestureTriggerBlock;
     if (_longPressGestureTriggerBlock) {
@@ -366,7 +375,6 @@
     _alertActions = alertActions;
     if (_alertActions.count > 0) {
         _longPressGestureEnabled = YES;
-        
     }
 }
 
