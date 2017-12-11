@@ -8,7 +8,7 @@
 
 <div align=center>
 
-![iPhone8_index_h](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhone8_index_v.gif)   ![iPhone8_pagecontrol_h](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhone8_pagecontrol_v.gif)   ![iPhoneX_pagecontrol_h](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhoneX_pagecontrol_v.gif)
+![iPhone8_index_h](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhone8_index_v.gif)   ![iPhone8_pagecontrol_h](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhone8_pagecontrol_v.gif)   ![iPhone8_animator_h](https://github.com/MeetDay/WCPhotoBrowser/blob/master/Assets/iPhone8_animator_v.gif)
 
 </div>
 
@@ -29,13 +29,13 @@
 
 # Usage
 
-- ####   导入头文件：
+- #### 导入头文件：
 
 ``` objective-c
 #import "WCPhotoBrowser.h"
 ```
 
-- ####   显示顶部的图片索引( 例如：1/6 )，隐藏底部的PageControl。
+- #### 显示顶部的图片索引( 例如：1/6 )，隐藏底部的PageControl。
 
 ``` objective-c
 WCPhotoBrowserViewController *photoBrowser = [[WCPhotoBrowserViewController alloc] init];
@@ -51,7 +51,7 @@ photoBrowser.networkImages = self.networkImages;
 [photoBrowser show];
 ```
 
-- ####   显示底部的PageControl，隐藏顶部的图片索引( 例如：1/6 )。
+- #### 显示底部的PageControl，隐藏顶部的图片索引( 例如：1/6 )。
 
 ``` objective-c
 WCPhotoBrowserViewController *photoBrowser = [[WCPhotoBrowserViewController alloc] init];
@@ -75,7 +75,63 @@ photoBrowser.networkImages = self.networkImages;
 [photoBrowser show];
 ```
 
-- ####   支持单击屏幕隐藏图片浏览器
+- ##### 若想实现类似微信的图片查看效果：查看图片时从图片的初始位置开始放大至占满全屏，消失时从全屏状态慢慢缩放至图片的初始状态。
+
+``` objective-c
+WCPhotoBrowserViewController *photoBrowser = [[WCPhotoBrowserViewController alloc] init];
+// 隐藏底部的pageControl
+photoBrowser.displayPageControl = NO;
+// 显示顶部的图片索引信息(例如： 1/6)
+photoBrowser.displayPhotoOrderInfo = YES;
+// 首次展示的图片，可根据点击的图片而定
+photoBrowser.firstDisplayPhotoIndex = 3;
+// 展示的图片
+photoBrowser.localImages = self.images;
+// 设置PhotoBrowser的转场代理
+WCPhotoBrowserAnimator *animator = [[WCPhotoBrowserAnimator alloc] init];
+// 设置WCPhotoBrowser的animatorDelegate
+animator.animatorDelegate = self;
+self.animator = animator;
+photoBrowser.transitioningDelegate = self.animator;
+// 显示图片浏览器
+[photoBrowser show];
+```
+
+##### 	设置WCPhotoBrowserAnimator的animatorDelegate并实现以下代理方法
+
+``` objective-c
+@protocol WCPhotoBrowserAnimatorDelegate <NSObject>
+
+@required
+
+/**
+ 根据下标返回将要展示的图片
+
+ @param willDisplayImageIndex 将要展示图片的下标
+ @return 返回将要展示的图片
+ */
+- (UIImage *)willDisplayImageInPhotoBrowserAtIndex:(NSInteger)willDisplayImageIndex;
+
+/**
+ 根据图片下标返回将要展示图片相对屏幕的开始位置
+
+ @param willDisplayImageIndex 将要展示图片的下标
+ @return 将要展示图片的开始位置
+ */
+- (CGRect)willDisplayImageOfStartRectAtIndex:(NSInteger)willDisplayImageIndex;
+
+/**
+ 根据图片下标返回将要展示图片相对屏幕的结束位置
+
+ @param willDisplayImageIndex 将要展示图片的下标
+ @return 将要展示图片动画结束后的位置
+ */
+- (CGRect)willDisplayImageOfEndRectAtIndex:(NSInteger)willDisplayImageIndex;
+
+@end
+```
+
+- #### 支持单击屏幕隐藏图片浏览器
 
 ``` objective-c
 // 是否允许单击屏幕隐藏图片浏览器，默认为YES
@@ -84,7 +140,7 @@ photoBrowser.networkImages = self.networkImages;
 photoBrowser.singleTapGestureEnabled = YES;
 ```
 
-- ####   支持长按手势
+- #### 支持长按手势
 
 ``` objective-c
 // 启用长按手势，默认为NO
@@ -109,7 +165,7 @@ photoBrowser.delegate = self;
 }
 ```
 
-- ####   PhotoBrowser的代理协议： WCPhotoBrowserViewControllerDelegate
+- #### PhotoBrowser的代理协议： WCPhotoBrowserViewControllerDelegate
 
 ``` objective-c
 @protocol WCPhotoBrowserViewControllerDelegate <NSObject>
