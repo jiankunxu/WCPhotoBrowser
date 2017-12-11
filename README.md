@@ -97,7 +97,7 @@ photoBrowser.transitioningDelegate = self.animator;
 [photoBrowser show];
 ```
 
-##### 	设置WCPhotoBrowserAnimator的animatorDelegate并实现以下代理方法
+- ##### 设置WCPhotoBrowserAnimator的animatorDelegate并实现以下代理方法
 
 ``` objective-c
 @protocol WCPhotoBrowserAnimatorDelegate <NSObject>
