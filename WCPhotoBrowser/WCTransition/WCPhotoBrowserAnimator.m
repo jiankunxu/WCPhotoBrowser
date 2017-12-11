@@ -38,9 +38,10 @@
         toView.alpha = 0.0;
         [containerView addSubview:toView];
         
-        UIImage *image = [self.animatorDelegate willDisplayImageInPhotoBrowserAtIndex:0];
-        CGRect startRect = [self.animatorDelegate willDisplayImageOfStartRectAtIndex:0];
-        CGRect endRect = [self.animatorDelegate willDisplayImageOfEndRectAtIndex:0];
+        NSInteger currentDisplayImageIndex = [self.animatorDismissDelegate currentDisplayImageIndexInPhotoBrowser];
+        UIImage *image = [self.animatorDelegate willDisplayImageInPhotoBrowserAtIndex:currentDisplayImageIndex];
+        CGRect startRect = [self.animatorDelegate willDisplayImageOfStartRectAtIndex:currentDisplayImageIndex];
+        CGRect endRect = [self.animatorDelegate willDisplayImageOfEndRectAtIndex:currentDisplayImageIndex];
         
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
         imageView.frame = startRect;

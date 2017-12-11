@@ -61,18 +61,30 @@
 @interface WCTableViewCell () <WCPhotoBrowserAnimatorDelegate>
 
 @property (nonatomic, strong) WCPhotoBrowserAnimator *animator;
-@property (weak, nonatomic) IBOutlet UIImageView *image0;
-@property (weak, nonatomic) IBOutlet UIImageView *image1;
+@property (weak, nonatomic) IBOutlet UIView *imageContainer;
 
 @end
 
 @implementation WCTableViewCell
 
-- (IBAction)buttonDidClicked:(UIButton *)sender {
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    if (self.imageContainer) {
+        for (UIView *subView in self.imageContainer.subviews) {
+            if ([subView isKindOfClass:[UIImageView class]]) {
+                UIImageView *imageView = (UIImageView *)subView;
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+                [imageView addGestureRecognizer:tap];
+            }
+        }
+    }
+}
+
+- (void)handleTapGesture:(UITapGestureRecognizer *)tapGesture {
     WCPhotoBrowserViewController *photoBrowser = [[WCPhotoBrowserViewController alloc] init];
     photoBrowser.displayPageControl = NO;
     photoBrowser.displayPhotoOrderInfo = YES;
-    photoBrowser.firstDisplayPhotoIndex = 0;
+    photoBrowser.firstDisplayPhotoIndex = tapGesture.view.tag % 1000;
     photoBrowser.localImages = self.images;
     self.animator = [[WCPhotoBrowserAnimator alloc] init];
     self.animator.animatorDelegate = self;
@@ -85,7 +97,16 @@
 }
 
 - (CGRect)willDisplayImageOfStartRectAtIndex:(NSInteger)willDisplayImageIndex {
-    return [self.image0 convertRect:self.image0.frame toView:[UIApplication sharedApplication].keyWindow];
+    UIImageView *currentImageView = nil;
+    for (UIView *subView in self.imageContainer.subviews) {
+        if ([subView isKindOfClass:[UIImageView class]]) {
+            UIImageView *imageView = (UIImageView *)subView;
+            if (imageView.tag % 1000 == willDisplayImageIndex) {
+                currentImageView = imageView; break;
+            }
+        }
+    }
+    return [currentImageView convertRect:currentImageView.bounds toView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (CGRect)willDisplayImageOfEndRectAtIndex:(NSInteger)willDisplayImageIndex {
@@ -97,8 +118,19 @@
     if (height < screenHeight) {
         y = (screenHeight - height) / 2.0;
     }
-    NSLog(@"width: %f, height: %f", screenWidth, height);
     return CGRectMake(0, y, screenWidth, height);
+}
+
+- (IBAction)buttonDidClicked:(UIButton *)sender {
+    WCPhotoBrowserViewController *photoBrowser = [[WCPhotoBrowserViewController alloc] init];
+    photoBrowser.displayPageControl = NO;
+    photoBrowser.displayPhotoOrderInfo = YES;
+    photoBrowser.firstDisplayPhotoIndex = 0;
+    photoBrowser.localImages = self.images;
+    self.animator = [[WCPhotoBrowserAnimator alloc] init];
+    self.animator.animatorDelegate = self;
+    photoBrowser.transitioningDelegate = self.animator;
+    [photoBrowser show];
 }
 
 @end

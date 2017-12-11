@@ -77,8 +77,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Des-b3-056">
                                             <rect key="frame" x="15" y="15" width="345" height="362.5"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="papi酱的周一放送——如果具有12星座典型性格的12个人，凑在一起开会，会是什么样的呢？（这是我精分最多的一期视频了，好累！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhD-oc-I3k">
-                                                    <rect key="frame" x="8" y="0.0" width="326.5" height="10"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如果具有12星座典型性格的12个人，凑在一起开会，会是什么样的呢？（这是我精分最多的一期视频了，好累！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhD-oc-I3k">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="10"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -86,7 +86,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzw-ho-5SS">
                                                     <rect key="frame" x="0.0" y="18" width="345" height="344.5"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" tag="1000" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image0" translatesAutoresizingMaskIntoConstraints="NO" id="FLi-I1-lx7" customClass="image0">
+                                                        <imageView clipsSubviews="YES" tag="1000" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image0" translatesAutoresizingMaskIntoConstraints="NO" id="FLi-I1-lx7">
                                                             <rect key="frame" x="0.0" y="0.0" width="111.5" height="111.5"/>
                                                             <gestureRecognizers/>
                                                             <constraints>
@@ -94,7 +94,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" tag="1001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image1" translatesAutoresizingMaskIntoConstraints="NO" id="Wps-CL-LCr">
-                                                            <rect key="frame" x="116.5" y="0.0" width="112" height="111.5"/>
+                                                            <rect key="frame" x="116" y="0.0" width="112" height="111.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Wps-CL-LCr" secondAttribute="height" multiplier="1:1" id="SKo-wI-ILK"/>
                                                             </constraints>
@@ -116,9 +116,6 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="bDc-uC-xqZ" secondAttribute="height" multiplier="1:1" id="ng3-0g-8qw"/>
                                                             </constraints>
-                                                            <connections>
-                                                                <outletCollection property="gestureRecognizers" destination="7hC-Cf-vhS" appends="YES" id="PYf-w6-PR8"/>
-                                                            </connections>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" tag="1005" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image5" translatesAutoresizingMaskIntoConstraints="NO" id="gxs-vx-Wdv">
                                                             <rect key="frame" x="233.5" y="116.5" width="111.5" height="112"/>
@@ -200,7 +197,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="image1" destination="Wps-CL-LCr" id="ZG6-pz-zgm"/>
+                                    <outlet property="imageContainer" destination="dzw-ho-5SS" id="4oc-w8-jfz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -211,9 +208,8 @@
                     </tableView>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VuE-h1-hGy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="7hC-Cf-vhS"/>
             </objects>
-            <point key="canvasLocation" x="1926" y="530"/>
+            <point key="canvasLocation" x="1177" y="758"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PKd-GM-xEf">
