@@ -25,7 +25,7 @@
   
   1. 下载WCPhotoBrowserDemo。
   2. 将WCPhotoBrowser文件夹中的源代码添加(拖放)到你的工程。
-  3. 导入WCPhotoBrowser.h都文件即可。
+  3. 导入WCPhotoBrowser.h头文件即可。
 
 # Usage
 
